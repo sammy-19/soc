@@ -1,0 +1,82 @@
+{# home/about.html #}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>About Saving Our Community</h1>
+        <p>Learn more about our mission, vision, and the team driving change.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content about-page">
+
+    <section class="mission-vision top-spacer">
+        <div class="section-content-wide flex-wrapper">
+            <div class="content-block mission">
+                <h2><i class="fa fa-bullseye" aria-hidden="true"></i> Our Mission</h2>
+                <p>{{ mission|linebreaksbr }}</p> {# Use context variable #}
+            </div>
+            <div class="content-block vision">
+                <h2><i class="fa fa-eye" aria-hidden="true"></i> Our Vision</h2>
+                 <p>{{ vision|linebreaksbr }}</p> {# Use context variable #}
+            </div>
+        </div>
+    </section>
+
+    <section class="our-values top-spacer light-bg">
+        <div class="section-content">
+            <h2><i class="fa fa-heartbeat" aria-hidden="true"></i> Our Core Values</h2>
+            <p>The principles that guide our work and interactions:</p>
+            <div class="values-grid grid-wrapper">
+                {% for value in values %} {# Loop through values #}
+                <div class="value-item">
+                    {% if value.icon_class %}
+                        <i class="{{ value.icon_class }} icon-large" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-star icon-large" aria-hidden="true"></i> {# Default icon #}
+                    {% endif %}
+                    <h4>{{ value.name }}</h4>
+                    <p>{{ value.description|linebreaksbr }}</p>
+                </div>
+                {% empty %}
+                <p>Our core values will be detailed here soon.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="our-team top-spacer">
+         <div class="section-content">
+            <h2><i class="fa fa-user-circle" aria-hidden="true"></i> Meet the Team</h2>
+             <div class="team-grid grid-wrapper">
+                {% for member in team_members %} {# Loop through team members #}
+                <div class="team-member program">
+                    {% if member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}">
+                    {% else %}
+                         <img src="{% static 'images/team/default_avatar.png' %}" alt="{{ member.name }}"> {# Default avatar #}
+                    {% endif %}
+                    <h4>{{ member.name }}</h4>
+                    <figcaption>{{ member.title }}</figcaption>
+                    {% if member.bio %}<p class="member-bio">{{ member.bio|linebreaksbr }}</p>{% endif %}
+                </div>
+                {% empty %}
+                 <p>Team member information is coming soon.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="history top-spacer light-bg">
+        <div class="section-content">
+            <h2><i class="fa fa-history" aria-hidden="true"></i> Our Journey</h2>
+            <p>{{ history|linebreaksbr }}</p> {# Use context variable #}
+        </div>
+    </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+{# home/index.html #}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content'>
+        {# Use variables from context #}
+        <h1>{{ banner_title|default:"Get Involved with a helping hand" }}</h1>
+        <p>{{ banner_text|default:"Placeholder text if banner_text is missing."|linebreaksbr }}</p>
+        <aside id='donate' class='donate'><a href="#" id="banner-button" class='trigger-donate-popup'>Donate Now</a></aside>
+        <aside id='prev' class='btn fa fa-chevron-left' aria-label="Previous Slide"></aside>
+        <aside id='next' class='btn fa fa-chevron-right' aria-label="Next Slide"></aside>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class='body-content'>
+        <div class='intro-content'>
+            <figure>
+                {# Example: Use PageSection content as URL #}
+                {% if intro_image_section %}
+                    <img src="{% static intro_image_section.content %}" alt="Introduction Image">
+                {% else %}
+                    <img src="{% static 'images/home/banner.png' %}" alt="Default Introduction Image"> {# Fallback #}
+                {% endif %}
+            </figure>
+        </div>
+        <div class='intro-content'>
+            <h2>About Us</h2>
+            <p class='paragraph'>{{ about_intro|default:"Default intro text..."|linebreaksbr }}</p>
+            <div class='flex-wrapper tab-headings'>
+                <h3 class='active' data-tab="about">Goal</h3>
+                <h3 class='inactive' data-tab="vision">Vision</h3>
+                <h3 class='inactive' data-tab="mission">Mission</h3>
+            </div>
+
+            {# Tab Content - Initially only 'About' content might be visible via CSS/JS #}
+            {# We'll show all stacked for now without JS #}
+            <div class='flex-wrapper tab-content-wrapper inactive'>
+
+                {# About Tab Content #}
+                <article class='intro-info tab-content' id="tab-about">
+                    {% if home_tab_about %}
+                        <p class='statement'>{{ home_tab_about.content|linebreaksbr }}</p>
+                    {% else %}
+                        <p class='statement'>[About content coming soon...]</p>
+                    {% endif %}
+                </article>
+
+                {# Vision Tab Content (Initially hidden by CSS/JS) #}
+                <article class='intro-info tab-content' id="tab-vision">
+                     {% if home_tab_vision %}
+                        <p class='statement'>{{ home_tab_vision.content|linebreaksbr }}</p>
+                    {% else %}
+                        <p class='statement'>[Vision content coming soon...]</p>
+                    {% endif %}
+                </article>
+
+                {# Mission Tab Content (Initially hidden by CSS/JS) #}
+                <article class='intro-info tab-content' id="tab-mission">
+                     {% if home_tab_mission %}
+                        <p class='statement'>{{ home_tab_mission.content|linebreaksbr }}</p>
+                    {% else %}
+                        <p class='statement'>[Mission content coming soon...]</p>
+                    {% endif %}
+                </article>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="main-body">
+        <section class="first-part">
+            <h2>What We Do!</h2>
+            <p>We believe we can do more with your help!</p>
+            <div class='flex-wrapper'>
+                {# Loop through featured programs #}
+                {% for program in featured_programs %}
+                <div class='program'>
+                    {% if program.image %}
+                        <img src="{{ program.image.url }}" alt="{{ program.name }}">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.png' %}" alt="{{ program.name }}"> {# Default image #}
+                    {% endif %}
+                    <h4>{{ program.name }}</h4>
+                    <figcaption>{{ program.short_description|default:program.full_description|truncatewords:30|linebreaksbr }}</figcaption>
+                </div>
+                {% empty %}
+                 <p>Information about our programs is coming soon.</p>
+                {% endfor %}
+            </div>
+            <aside class='more'><a href="{% url 'home:programs' %}">Learn More About Our Programs</a></aside>
+        </section>
+
+        <section class="top-spacer second-part">
+            <h2>Our Achievements!</h2>
+            <p>What we have accomplished so far!!</p>
+            <div class='grid-wrapper'>
+                 {# Loop through achievements #}
+                {% for achievement in achievements %}
+                <div class='program'> {# Reusing program style #}
+                     {% if achievement.image %}
+                        <img src="{{ achievement.image.url }}" alt="{{ achievement.title }}">
+                    {% else %}
+                         <img src="{% static 'images/placeholder.png' %}" alt="{{ achievement.title }}"> {# Default image #}
+                    {% endif %}
+                    <h4>{{ achievement.title }}</h4>
+                    <figcaption>{{ achievement.description|linebreaksbr }}</figcaption>
+                </div>
+                {% empty %}
+                <p>Our achievements will be listed here soon.</p>
+                {% endfor %}
+            </div>
+            {# <aside class='more'><a href='#'>Read More</a></aside> #}
+        </section>
+
+        {# --- Donate Section --- #}
+        <section id="donate-section-anchor" class="donate-section top-spacer"> {# ID for anchor link #}
+            <div class="section-content">
+                 {# Example: Use dynamic title if fetched: {{ home_donate_title.title|default:"Support Our Cause" }} #}
+                <h2>Support Our Cause</h2>
+                 {# Example: Use dynamic text if fetched: {{ home_donate_text.content|default:"Default text..."|linebreaksbr }} #}
+                <p>Your generous donation fuels our mission and directly impacts the communities we serve. Every contribution, big or small, makes a difference.</p>
+                {# Ensure this link points to your actual donation page or service #}
+                <a href="#" id="banner-button" class='donate trigger-donate-popup' style='text-decoration: none'>Donate Today</a>
+            </div>
+        </section>
+
+        {# --- Become a Volunteer Section --- #}
+        <section class="volunteer-section top-spacer">
+            <div class="section-content">
+                 {# Example: Use dynamic title if fetched: {{ home_volunteer_title.title|default:"Become a Volunteer" }} #}
+                <h2>Become a Volunteer</h2>
+                 {# Example: Use dynamic text if fetched: {{ home_volunteer_text.content|default:"Default text..."|linebreaksbr }} #}
+                <p>Lend your time and skills to empower our community. Join our dedicated team and be part of the change.</p>
+                {# This button's ID triggers the popup via JavaScript in main.js #}
+                <button id="open-volunteer-popup" class="btn-volunteer-action">I Want to Volunteer</button>
+            </div>
+        </section>
+
+        {# --- Feedback Section --- #}
+        <section class="feedback-section top-spacer">
+            <div class="section-content">
+                <h2>Leave Your Feedback</h2>
+                <p>We value your opinion. Share your thoughts, suggestions, or questions with us.</p>
+                 {# Use name attribute on submit button to differentiate forms if needed #}
+                <form id="feedback-form" action="{% url 'home:home' %}" method="post">
+                    {% csrf_token %}
+                    {# Render form fields manually or using {{ feedback_form.as_p }} #}
+                    {{ feedback_form.as_p }}
+                    <button type="submit" name="submit_feedback" class="btn-submit-feedback">Send Feedback</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

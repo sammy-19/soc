@@ -1,0 +1,41 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Manage Team Members | Content Manager{% endblock %}
+
+{% block page_title %}Manage Team Members{% endblock %}
+
+{% block content %}
+<div class="action-bar">
+    <a href="{% url 'cm_teammember_new' %}" class="btn btn-primary">Add New Team Member</a>
+</div>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in team_members %} {# Use context_object_name from view #}
+        <tr>
+            <td>{{ member.name }}</td>
+            <td>{{ member.title }}</td>
+            <td>{{ member.display_order }}</td>
+            <td>{% if member.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'cm_teammember_edit' member.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="{% url 'cm_teammember_delete' member.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No team members found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,994 @@
+/* Global reset and box-sizing */
+* {
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+html {
+    scroll-behavior: smooth; /* Optional: Smooth scrolling for anchor links */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header and header content Styles*/
+header {
+    padding: 0;
+    margin: 0;
+    /* position: sticky; top: 0; background-color: white; z-index: 1000; */ /* Optional: Sticky header */
+}
+
+/* Contact and Media links style properties*/
+.media-links {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between;
+    background-color: #000;
+    padding: 5px 10%; /* Use padding on container */
+}
+
+.media-links p {
+    margin: 5px 0; /* Adjust margin */
+    font-size: 0.9em;
+    color: #c0c0c0;
+}
+
+.media-links a {
+    padding: 0 5px;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: #c0c0c0;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* header content, logo and navigation links styles and their properties*/
+.header-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: rgb(0, 0, 126);
+    flex-wrap: wrap; /* Allow wrapping */
+    padding: 10px 0; /* Add some vertical padding */
+}
+
+.header-content img {
+    width: 80px; /* Slightly smaller maybe */
+    height: 80px;
+    margin: 5px; /* Add margin for wrap spacing */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0; /* Remove default padding */
+    margin: 5px 0; /* Add margin for wrap spacing */
+    text-align: center; /* Center nav items when wrapped */
+}
+
+nav li {
+    display: inline-block; /* Use inline-block for better control */
+    padding: 10px 20px; /* Apply padding directly */
+    margin: 0 5px; /* Add horizontal margin between items */
+    border-bottom: 3px solid transparent; /* Prepare for hover effect */
+    transition: border-bottom 0.3s ease; /* Smooth transition */
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    color: inherit; /* Inherit color from parent */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+nav li:hover {
+    /* padding: 10px 20px; */ /* Padding already applied */
+    border-bottom: 3px solid rgb(255, 42, 77);
+}
+
+nav li:hover a {
+    color: rgb(255, 42, 77);
+}
+
+/* Donate button specific styles in the header */
+.header-content .donate {
+    margin: 5px 1%; /* Add margin for wrap spacing */
+}
+
+.donate { /* General donate button style */
+    padding: 10px 20px;
+    border: 2px solid rgb(255, 42, 77);
+    border-radius: 15px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.donate a {
+    color: navy;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.donate:hover {
+    background-color: rgb(255, 42, 77);
+}
+
+.donate:hover a {
+    color: white; /* Change text color on hover for better contrast */
+}
+
+/* Donate button within the banner */
+#donate {
+    /* padding: auto 36px; */ /* Invalid - removed */
+    font-size: 1.5em; /* Larger font size for banner context */
+    margin-top: 20px; /* Add some space above */
+}
+
+/* Donate popup section */
+#donate-info-popup .popup-content {
+    max-width: 550px; /* Adjust width as needed */
+    text-align: left;
+}
+
+#donate-info-popup h3 {
+    text-align: center;
+    color: navy;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+#donate-info-popup h4 {
+    color: navy;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.2em;
+}
+#donate-info-popup h4 i {
+    margin-right: 8px;
+    color: rgb(255, 42, 77); /* Accent color */
+}
+
+#donate-info-popup p {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#donate-info-popup .donation-method dl {
+    margin-left: 0;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 3px solid #eee;
+}
+#donate-info-popup .donation-method dt {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+}
+#donate-info-popup .donation-method dd {
+    margin-left: 0; /* Reset user agent margin */
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 1.05em; /* Make details slightly larger */
+}
+#donate-info-popup .donation-method dd strong {
+    display: inline-block;
+    min-width: 70px; /* Align numbers/names */
+}
+
+#donate-info-popup .mobile-money.mtn dt { color: #ffcb0a; } /* Example colors */
+#donate-info-popup .mobile-money.airtel dt { color: #e60000; }
+#donate-info-popup .mobile-money.zamtel dt { color: #00a859; }
+
+#donate-info-popup .donation-instructions {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    font-size: 0.95em;
+    color: #666;
+}
+
+#donate-info-popup .donation-instructions strong {
+    color: #333;
+}
+
+/* Copy-to-clipboard button styling - JS needed for functionality */
+.copy-btn { margin-left: 10px; cursor: pointer; font-size: 0.8em; } 
+
+/* Main Styles */
+.container {
+    margin: 0;
+}
+
+.show { display: block; }
+.hidden { display: none; }
+
+anner-content h1,
+.banner-content p,
+.banner-content .donate /* Target the button by class or ID #banner-button */
+ {
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out; /* Smooth fade for text/button */
+}
+
+.banner {
+    background-image: url('../images/home/children.jpg');
+    background-size: cover;
+    background-position: center; /* Center the background image */
+    min-height: 70vh;
+    position: relative;
+    transition: background-image 0.7s ease-in-out
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Center text */
+    background-color: rgba(29, 30, 21, 0.6); /* Slightly darker overlay? */
+    width: 100%;
+    color: #f1e3e3;
+    padding: 40px 24px; /* Increased padding */
+    min-height: 70vh; /* Match banner height */
+    position: relative; /* Added: Anchor for prev/next buttons */
+}
+
+.banner h1, .banner p {
+    max-width: 70%; /* Increased max-width */
+}
+
+.banner h1 {
+    text-transform: capitalize;
+    font-size: 2.5em;
+    margin-bottom: 15px; /* Add space below heading */
+}
+
+.banner p {
+    text-align: center; /* Changed from justify */
+    font-size: 1.1em; /* Slightly larger */
+    line-height: 1.6; /* Improve readability */
+}
+
+.btn {
+    position: absolute;
+    top: 50%; /* Position relative to vertical center */
+    transform: translateY(-50%); /* Fine-tune vertical centering */
+    font-size: 2em; /* Slightly larger */
+    color: #f1e3e3; /* Ensure visibility */
+    cursor: pointer; /* Add pointer cursor */
+    transition: color 0.3s ease; /* Smooth transition */
+    z-index: 10; /* Ensure buttons are above content */
+}
+
+.btn:hover {
+    color: rgb(255, 42, 77);
+}
+
+#prev {
+    left: 2%; /* Slightly more inset */
+}
+
+#next {
+    right: 2%; /* Slightly more inset */
+}
+
+/* Main body styles and properties */
+
+.main {
+    padding: 0;
+    margin: 0;
+}
+
+.body-content {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-direction: row;
+    justify-content: center; /* Center items when they wrap */
+    padding: 30px 5%; /* Add padding */
+}
+
+.intro-content {
+    padding: 15px;
+    flex: 1 1 400px; /* Allow flex items to grow/shrink with a base width */
+    max-width: 600px; /* Optional: Limit max width */
+}
+
+.intro-content figure {
+    margin: 0;
+}
+.intro-content figure img {
+    max-width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+}
+
+.body-content h2 {
+    color: rgb(255, 42, 77);
+    font-variant: small-caps;
+    margin-top: 0; /* Adjust margin */
+}
+
+.paragraph {
+    text-align: justify;
+    font-size: 1.1em; /* Adjusted size */
+    padding: 0; /* Remove padding if intro-content has it */
+    line-height: 1.6;
+}
+
+.flex-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allow wrapping */
+    margin-top: 15px; /* Add some space */
+}
+
+/* Styles for the tab-like headings */
+.flex-wrapper h3 {
+    padding: 12px 24px; /* Adjusted padding */
+    cursor: pointer;
+    margin: 5px; /* Add margin for spacing */
+    border-radius: 5px; /* Optional rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.statement {
+    font-size: 1em; /* Adjusted size */
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Styles for the articles under tabs */
+.intro-info {
+    padding: 15px;
+    /* border: 1px solid #eee; */ /* Optional border */
+    /* margin-top: 10px; */ /* Add space if needed */
+    /* width: 100%; */ /* Ensure full width if stacked */
+}
+
+.active { /* Style for active tab heading */
+    background-color: rgba(255, 14, 77, 0.7); /* Made slightly stronger */
+    color: white; /* Better contrast */
+}
+
+.inactive { /* Style for inactive tab heading */
+    background-color: #f1e3e3;
+    color: #333; /* Darker text for readability */
+}
+.inactive:hover {
+    background-color: #e0dada; /* Hover effect for inactive tabs */
+}
+
+/* Styles for the main-body div tag */
+
+/* First part section */
+.first-part, .second-part {
+    background-color: #f7f7f7; /* Slightly lighter grey */
+    padding: 40px 5%; /* Consistent padding */
+}
+
+.second-part {
+    background-color: #ffffff; /* Alternate background maybe? */
+}
+
+.first-part h2, .second-part h2 {
+    text-transform: uppercase;
+    text-align: center;
+    color: rgb(218, 8, 165);
+    margin-bottom: 10px; /* Space below heading */
+}
+
+.first-part p, .second-part p {
+    text-align: center;
+    font-size: 1.5em; /* Reduced font size */
+    font-weight: 400;
+    color: rgba(49, 49, 185, 0.7); /* Slightly stronger color */
+    margin-bottom: 30px; /* More space below paragraph */
+    max-width: 800px; /* Limit width of subtitle */
+    margin-left: auto; /* Center subtitle */
+    margin-right: auto; /* Center subtitle */
+}
+
+/* Grid layout for achievements */
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 25px; /* Corrected unit and adjusted value */
+}
+
+/* Flex layout for 'What We Do' (already defined .flex-wrapper) */
+.first-part .flex-wrapper {
+     align-items: flex-start; /* Align items to top */
+     gap: 25px; /* Add gap for flex items too */
+}
+
+.program {
+    background-color: rgb(253, 238, 234);
+    padding: 15px; /* Adjusted padding */
+    margin: 0; /* Removed margin, gap handles spacing */
+    border-radius: 10px;
+    display: flex; /* Use flex for internal layout */
+    flex-direction: column; /* Stack image, title, text vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.program img {
+    width: 100%;
+    height: 250px; /* Adjusted height */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 5px; /* Slightly rounded corners for image */
+    margin-bottom: 15px; /* Space below image */
+}
+
+.program h4 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: navy; /* Match donate button link color? */
+}
+
+.program figcaption {
+    font-size: 0.95em; /* Adjust size */
+    line-height: 1.5;
+    color: #555; /* Slightly lighter text color */
+    flex-grow: 1; /* Allow caption to take remaining space */
+}
+
+.program:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+/* Read More button */
+.more {
+    display: block; /* Make it a block element */
+    margin: 30px auto 10px auto; /* Center horizontally, add vertical margins */
+    padding: 12px 24px; /* Adjusted padding */
+    background-color: rgba(212, 11, 145, 0.6); /* Adjusted alpha */
+    text-align: center;
+    width: fit-content; /* Size button to content */
+    max-width: 90%; /* Ensure it doesn't overflow */
+    border-radius: 20px; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.more a {
+    text-decoration: none;
+    color: #000080;
+    font-weight: 500; /* Adjusted weight */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.more:hover {
+    background-color: rgba(212, 11, 145, 0.8); /* Darken on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+
+/* Footer Content styles and properties*/
+footer {
+    padding: 0 5%; /* Use percentage padding */
+    margin: 0;
+    background-color: #000;
+    color: #c0c0c0; /* Default footer text color */
+}
+
+.wrapper { /* Footer main content columns */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping */
+    /* align-items: center; */ /* Align items at the top */
+    align-items: flex-start;
+    padding: 30px 0; /* Vertical padding */
+    border-bottom: 1px solid #444; /* Lighter border */
+    gap: 20px; /* Add gap between wrapped columns */
+}
+
+.footer-content {
+    flex: 1 1 200px; /* Allow columns to grow/shrink */
+    padding: 0 15px; /* Add padding within columns */
+    margin-bottom: 20px; /* Space below each section when wrapped */
+}
+
+.footer-content h2 {
+    text-align: left;
+    color: rgb(255, 42, 77);
+    font-size: 1.3em; /* Adjust size */
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 15px; /* Space below heading */
+}
+
+.foot-info { /* Individual link/info line */
+    display: block;
+    color: rgb(203, 216, 216);
+    font-size: 1em;
+    margin-bottom: 8px; /* Space between lines */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.foot-info a {
+    text-decoration: none;
+    padding: 0; /* Remove padding if margin handles spacing */
+    color: inherit; /* Inherit color from .foot-info */
+    display: inline-block; /* Ensure hover works well */
+}
+
+
+.foot-info:hover, .foot-info:hover a {
+    color: rgb(255, 14, 77);
+}
+
+/* Copyright section */
+.copyrights {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping */
+    padding: 20px 0; /* Vertical padding */
+    font-size: 0.9em; /* Smaller font */
+}
+
+.copyrights aside { /* Assuming 'aside' is used here, adjust if not */
+     padding: 5px 10px; /* Adjust padding */
+}
+
+cite, .copyrights p {
+    color: #aaa; /* Lighter color for copyright */
+    margin: 5px 10px; /* Add margin for spacing */
+}
+
+/* === Styles for New Sections (Donate, Volunteer, Feedback) === */
+
+/* General Section Styling */
+.donate-section,
+.volunteer-section,
+.feedback-section {
+    padding: 50px 5%;
+    text-align: center;
+}
+
+.donate-section {
+    background-color: #f0f8ff; /* AliceBlue - gentle color */
+}
+
+.volunteer-section {
+    background-color: #fff; /* White background */
+}
+
+.feedback-section {
+    background-color: #f8f8f8; /* Light grey */
+}
+
+.section-content {
+    max-width: 800px; /* Limit content width */
+    margin: 0 auto; /* Center content */
+}
+
+.donate-section h2,
+.volunteer-section h2,
+.feedback-section h2 {
+    color: navy; /* Match header link color */
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.donate-section p,
+.volunteer-section p,
+.feedback-section p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* Buttons in New Sections */
+.btn-donate-action,
+.btn-volunteer-action,
+.btn-submit-feedback,
+.btn-submit-volunteer {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border: none; /* Remove default border */
+}
+
+.btn-donate-action {
+    background-color: rgb(255, 42, 77); /* Primary action color */
+    color: white;
+    border: 2px solid rgb(255, 42, 77);
+}
+.btn-donate-action:hover {
+    background-color: white;
+    color: rgb(255, 42, 77);
+    transform: translateY(-2px);
+}
+
+.btn-volunteer-action {
+    background-color: navy; /* Secondary action color */
+    color: white;
+     border: 2px solid navy;
+}
+.btn-volunteer-action:hover {
+    background-color: white;
+    color: navy;
+    transform: translateY(-2px);
+}
+
+/* === Form Styling (Feedback & Volunteer Popup) === */
+#feedback-form,
+#volunteer-form {
+    text-align: left; /* Align form elements left */
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: inherit; /* Use body font */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: navy; /* Highlight focus */
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize only */
+    min-height: 100px;
+}
+
+/* Style for side-by-side form fields */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between fields in a row */
+}
+.form-group.half-width {
+    flex: 1 1 calc(50% - 10px); /* Allow two fields per row with gap */
+    min-width: 150px; /* Prevent excessive shrinking */
+}
+
+/* Submit Buttons */
+.btn-submit-feedback,
+.btn-submit-volunteer {
+    background-color: navy;
+    color: white;
+    border: 2px solid navy;
+    width: 100%; /* Full width submit */
+    margin-top: 10px;
+}
+
+.btn-submit-feedback:hover,
+.btn-submit-volunteer:hover {
+     background-color: white;
+     color: navy;
+     transform: translateY(-2px);
+}
+
+
+/* === Popup Modal Styling === */
+.popup-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000; /* High z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if content is too long */
+    background-color: rgba(0, 0, 0, 0.6); /* Dim background */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add padding for small screens */
+}
+
+.popup-modal.active {
+    display: flex; /* Show the modal */
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    max-width: 650px; /* Max width of popup */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: fadeInPopup 0.3s ease-out; /* Simple fade-in */
+    max-height: 90vh; /* Limit height */
+    overflow-y: auto; /* Allow internal scrolling */
+}
+
+.popup-content h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: navy;
+    font-size: 1.6em;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 2.5em;
+    font-weight: bold;
+    line-height: 1;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+    color: #333;
+    text-decoration: none;
+    outline: none;
+}
+
+/* Simple fade-in animation */
+@keyframes fadeInPopup {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === Responsive Styles === */
+
+/* Hamburger Button Styling (Hidden by default) */
+.navbar-toggler {
+    display: none; /* Hidden on larger screens */
+    background-color: transparent;
+    border: 1px solid navy; /* Match link color */
+    color: navy;
+    padding: 8px 12px;
+    font-size: 1.5em; /* Adjust size */
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: auto; /* Push it to the right */
+    order: 2; /* Ensure it comes after logo but before nav potentially */
+}
+.navbar-toggler:hover {
+    background-color: rgba(0, 0, 128, 0.1); /* Light navy background on hover */
+}
+
+
+/* Medium Screens and below (Tablets) */
+@media (max-width: 991px) {
+    .header-content {
+        padding: 10px 3%; /* Reduce padding slightly */
+    }
+    nav#main-nav li {
+        padding: 10px 12px; /* Reduce nav item padding */
+    }
+    nav#main-nav a {
+        font-size: 1em; /* Slightly smaller font */
+    }
+    .wrapper { /* Footer */
+        gap: 20px;
+    }
+    .footer-content {
+        flex-basis: 250px; /* Allow slightly more space before wrapping */
+    }
+    .banner h1 { font-size: 2.2em; }
+    .banner p { font-size: 1em; max-width: 80%; }
+
+}
+
+
+/* Small Screens (Tablets and Large Phones) */
+@media (max-width: 768px) {
+    /* Show Hamburger Button */
+    .navbar-toggler {
+        display: block;
+    }
+
+    /* Adjust header layout */
+    .header-content {
+        position: relative; /* Needed for absolute positioning of nav */
+        justify-content: space-between; /* Ensure logo and toggler are spaced out */
+    }
+     .logo-container {
+        order: 1; /* Logo first */
+    }
+     .navbar-toggler {
+        order: 2; /* Toggler second */
+         margin-left: 0; /* Reset margin */
+    }
+    .header-donate {
+        order: 3; /* Donate button last in flow */
+        margin: 10px auto 0 auto; /* Center donate button below logo/toggler when wrapped */
+        width: fit-content;
+    }
+
+    /* Hide original Nav and style for mobile dropdown */
+    nav#main-nav {
+        display: none; /* Hide nav by default */
+        position: absolute;
+        top: 100%; /* Position below header */
+        left: 0;
+        width: 100%;
+        background-color: #f8f9fa; /* Light background for dropdown */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 10px 0;
+        z-index: 1000; /* Ensure it's above other content */
+        order: 4; /* Ensure it's last visually */
+        max-height: calc(100vh - 70px); /* Limit height */
+        overflow-y: auto; /* Allow scrolling if needed */
+    }
+    nav#main-nav.is-active {
+        display: block; /* Show nav when active */
+    }
+    nav#main-nav ul {
+        display: block; /* Stack list items vertically */
+        width: 100%;
+        text-align: center;
+    }
+    nav#main-nav li {
+        display: block; /* Make list items block level */
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid #eee; /* Separator lines */
+    }
+    nav#main-nav li:last-child {
+        border-bottom: none;
+    }
+    nav#main-nav li:hover {
+        border-bottom: 1px solid #eee; /* Keep border, maybe change background */
+        background-color: #e9ecef;
+    }
+    nav#main-nav a {
+        display: block; /* Make links full width */
+        padding: 12px 20px; /* Padding for touch targets */
+        font-size: 1.1em;
+        color: #333; /* Darker text for dropdown */
+    }
+     nav#main-nav a:hover {
+        color: rgb(255, 42, 77); /* Highlight color on hover */
+    }
+    nav#main-nav li:hover a {
+         color: rgb(255, 42, 77); /* Ensure hover applies */
+    }
+
+    /* Stack .programs in .first-part */
+    .first-part .flex-wrapper {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        gap: 20px; /* Adjust gap for vertical stacking */
+    }
+    .first-part .program {
+        width: 90%; /* Take up most of the width */
+        max-width: 450px; /* Limit max width */
+    }
+
+    /* General Adjustments */
+    .banner h1 { font-size: 1.8em; max-width: 90%; }
+    .banner p { font-size: 1em; max-width: 90%; }
+    .body-content { padding: 20px 3%; }
+    .intro-content { padding: 10px; }
+    .paragraph { font-size: 1em; }
+    .statement { font-size: 0.95em; }
+    .first-part p, .second-part p { font-size: 1.3em; } /* Adjust subtitle */
+    .footer-content { flex-basis: 100%; /* Make footer columns full width */ text-align: center; /* Center text in footer columns */ }
+    .footer-content h2 { text-align: center; } /* Center footer headings */
+    .foot-info { justify-content: center; } /* Center icons/text if needed */
+    .copyrights { justify-content: center; text-align: center; }
+
+    .donate-section h2,
+    .volunteer-section h2,
+    .feedback-section h2,
+    .popup-content h3 {
+        font-size: 1.8em;
+    }
+
+    .donate-section p,
+    .volunteer-section p,
+    .feedback-section p {
+        font-size: 1em;
+    }
+
+    .popup-content {
+        padding: 25px 20px;
+        max-width: 95%;
+    }
+
+    .form-group.half-width {
+        flex-basis: 100%; /* Stack half-width fields on smaller screens */
+    }
+    .form-row {
+        gap: 0; /* Remove gap when stacking */
+    }
+
+}
+
+
+/* Smaller Screens (Phones) */
+@media (max-width: 660px) {
+    /* Hide .media-links */
+    .media-links {
+        display: none;
+    }
+
+     /* Further adjust header padding */
+    .header-content {
+        padding: 8px 4%;
+    }
+     .header-content img { width: 60px; height: 60px; } /* Smaller logo */
+     .navbar-toggler { font-size: 1.3em; padding: 6px 10px; }
+
+    /* Adjust font sizes */
+    .banner h1 { font-size: 1.6em; }
+    .banner p { font-size: 0.95em; }
+    .first-part p, .second-part p { font-size: 1.2em; }
+
+    .donate-section,
+    .volunteer-section,
+    .feedback-section {
+        padding: 40px 4%;
+    }
+    .btn-donate-action,
+    .btn-volunteer-action,
+    .btn-submit-feedback,
+    .btn-submit-volunteer {
+        padding: 10px 25px;
+        font-size: 1em;
+    }
+    .popup-content {
+        padding: 20px 15px;
+    }
+    .popup-content h3 {
+        font-size: 1.5em;
+    }
+
+    #donate-info-popup .popup-content {
+        padding: 20px 15px;
+    }
+    #donate-info-popup h3 { font-size: 1.4em; }
+    #donate-info-popup h4 { font-size: 1.1em; }
+    #donate-info-popup .donation-method dd { font-size: 1em; }
+}
+
+/* Very Small Screens */
+@media (max-width: 400px) {
+    .banner h1 { font-size: 1.4em; }
+    .program img { height: 200px; } /* Smaller program images */
+    /* Adjust donate button sizes if needed */
+    .donate { padding: 8px 15px; font-size: 0.9em; }
+    #donate { font-size: 1.2em; } /* Banner donate button */
+}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>Our Blog</h1>
+        <p>Stories, updates, and insights from our work in the community.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content blog-page">
+
+    <section class="blog-posts top-spacer">
+        <div class="section-content-wide">
+             {% if not blog_posts %}
+                 <p style="text-align: center; margin-top: 20px;">No blog posts published yet. Stay tuned!</p>
+            {% endif %}
+
+            <div class="blog-grid grid-wrapper">
+                {# Loop through blog posts from context #}
+                {% for post in blog_posts %}
+                <article class="blog-post-item program"> {# Reusing .program style #}
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                         <img src="{% static 'images/placeholder_blog.png' %}" alt="{{ post.title }}"> {# Default image #}
+                    {% endif %}
+                    <h4>{{ post.title }}</h4>
+                    <div class="post-meta">
+                        {# Check if author exists before displaying #}
+                        {% if post.author %}<span>By {{ post.author.get_full_name|default:post.author.username }}</span> | {% endif %}
+                        <span>{{ post.published_date|date:"M d, Y" }}</span>
+                    </div>
+                    <figcaption>
+                        {# Use excerpt if available, otherwise truncate content #}
+                        {{ post.excerpt|default:post.content|truncatewords_html:35|linebreaksbr }}
+                    </figcaption>
+                    {# IMPORTANT: Replace '#' with the actual URL to the blog post detail view #}
+                    {# You'll need to define get_absolute_url in the BlogPost model #}
+                    {# and create a URL pattern/view for displaying single posts #}
+                    <a href="#" class="btn-read-more">Read More</a>
+                </article>
+                {% endfor %}
+            </div>
+
+            {# Optional: Pagination controls #}
+            {# <nav class="pagination"> ... </nav> #}
+        </div>
+    </section>
+
+</div>
+{% endblock %}

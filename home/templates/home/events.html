@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %} {# Add load static if using static fallback images #}
+
+{% block title %}Events | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>Upcoming Events</h1>
+        <p>Join us for workshops, fundraisers, and community gatherings.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content events-page">
+
+    <section class="events-list top-spacer">
+        <div class="section-content-wide">
+            <h2>Upcoming Events</h2>
+            {% if not upcoming_events %}
+                 <p style="text-align: center; margin-top: 20px;">No upcoming events scheduled currently. Please check back soon!</p>
+            {% endif %}
+
+            <div class="events-grid">
+                {# Loop through upcoming events from context #}
+                {% for event in upcoming_events %}
+                <article class="event-item">
+                    {% if event.image %}
+                    <div class="event-image">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="event-details">
+                        <h3>{{ event.title }}</h3>
+                        <p class="event-meta">
+                            <span class="event-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ event.start_datetime|date:"M d, Y" }}</span>
+                            {% if event.end_datetime and event.end_datetime.date != event.start_datetime.date %}
+                                - <span class="event-end-date">{{ event.end_datetime|date:"M d, Y" }}</span>
+                            {% endif %}
+                             |
+                            <span class="event-time"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ event.start_datetime|time:"H:i" }}</span>
+                            {% if event.end_datetime %}
+                                - <span class="event-end-time">{{ event.end_datetime|time:"H:i" }}</span>
+                            {% endif %}
+                             |
+                            <span class="event-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.location_name }}</span>
+                        </p>
+                        <p class="event-description">
+                            {{ event.description|linebreaksbr }}
+                        </p>
+                        {% if event.registration_link %}
+                            <a href="{{ event.registration_link }}" target="_blank" rel="noopener noreferrer" class="btn-event-more">Learn More / Register</a>
+                        {% else %}
+                             {# Optionally show a different button or text if no link #}
+                             {# <span class="btn-event-more disabled">Details Coming Soon</span> #}
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% if past_events %}
+    <section class="events-list top-spacer light-bg">
+        <div class="section-content-wide">
+            <h2>Past Events</h2>
+            <div class="events-grid past-events"> {# Add class for potential styling differences #}
+                 {% for event in past_events %}
+                <article class="event-item">
+                     {% if event.image %}
+                    <div class="event-image">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    </div>
+                    {% endif %}
+                    <div class="event-details">
+                        <h3>{{ event.title }}</h3>
+                        <p class="event-meta">
+                            <span class="event-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ event.start_datetime|date:"M d, Y" }}</span>
+                             |
+                            <span class="event-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.location_name }}</span>
+                        </p>
+                        {# <p class="event-description">{{ event.description|truncatewords:25|linebreaksbr }}</p> #}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock %}

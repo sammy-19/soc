@@ -1,0 +1,243 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/page-styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/programs.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/soc-logo.png' %}">
+</head>
+
+<body>
+    <header>
+
+        <div class='media-links'>
+            <p><i class='fa fa-envelope'></i> savingourcommunity@gmail.com  |  <i class='fa fa-phone'></i> +260766634882</p>
+            <p>Follow Us On:
+                <a class='fa fa-instagram' href='https://www.instagram.com/p/CviX9Zwo1Ho/?igshid=YWYwM2I1ZDdmOQ==' target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
+                <a class='fa fa-youtube' href='https://www.youtube.com/@Soczambia' target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a> <a class='fa fa-facebook' href="https://www.facebook.com/profile.php?id=100093639196424&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a>
+                <a class='fa fa-linkedin' href='https://www.linkedin.com/in/saving-our-community-zambia-ab1b83261?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"></a>
+            </p>
+        </div>
+
+        <div class="header-content">
+            <div class="logo-container"> <a href="{% url 'home:home' %}" aria-label='SOC Homepage'><img src="{% static 'images/soc-logo.png' %}" alt="SOC Logo"></a>
+            </div>
+
+            <button class="navbar-toggler" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i> </button>
+
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="{% url 'home:home' %}" aria-label='Homepage'>home</a></li>
+                    <li><a href="{% url 'home:about' %}" aria-label='About Us'>about</a></li>
+                    <li><a href="{% url 'home:programs' %}" aria-label='Our Services'>programs</a></li>
+                    <li><a href="{% url 'home:events' %}" aria-label='Events'>events</a></li>
+                    <li><a href="{% url 'home:blog' %}" aria-label='Blog page'>blog</a></li>
+                    <li><a href="{% url 'home:causes' %}" aria-label='Community Challenges/Causes'>causes</a></li>
+                    <li><a href="{% url 'home:contact' %}" aria-label='Contact Page'>contact</a></li>
+                </ul>
+            </nav>
+
+            <div class='donate header-donate'>
+                <a href="#" class="trigger-donate-popup">Donate Now</a>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="container">
+        <section class='banner'>
+            {% block banner %}
+            {% endblock %}
+        </section>
+
+        <section class="main">
+            {% if messages %}
+            <div class="messages" style="padding: 10px; margin-bottom: 15px;">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert" style="padding: 10px 15px; border: 1px solid transparent; border-radius: 4px; margin-bottom: 10px; {% if message.tags == 'success' %}color: #155724; background-color: #d4edda; border-color: #c3e6cb;{% elif message.tags == 'error' %}color: #721c24; background-color: #f8d7da; border-color: #f5c6cb;{% else %}color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb;{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% block main %}
+            {% endblock %}
+        </section>
+    </div>
+
+    <footer>
+        <div class='wrapper'>
+            <div class='footer-content'>
+                <h2>Address</h2>
+                <p class='foot-info'><i class="fa fa-map-marker" aria-hidden="true"></i> <span>2644/358, Nahumba Rd, Livingstone.</span></p>
+                <p class='foot-info'><i class="fa fa-envelope" aria-hidden="true"></i> <span>savingourcommunityzambia@gmail.com</span></p>
+                <p class='foot-info'><i class="fa fa-phone" aria-hidden="true"></i> <span>+260975231604</span></p>
+                 <p class='foot-info social-footer'> <a class='fa fa-instagram' href='https://www.instagram.com/p/CviX9Zwo1Ho/?igshid=YWYwM2I1ZDdmOQ==' target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
+                    <a class='fa fa-youtube' href='https://www.youtube.com/@Soczambia' target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a>
+                    <a class='fa fa-facebook' href="https://www.facebook.com/profile.php?id=100093639196424&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a>
+                    <a class='fa fa-linkedin' href='https://www.linkedin.com/in/saving-our-community-zambia-ab1b83261?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"></a>
+                </p>
+            </div>
+            <div class='footer-content'>
+                <h2>Our Programs</h2>
+                <ul class="footer-links">
+                    <li class='foot-info'><a href="{% url 'home:programs' %}" alt="education">Education</a></li>
+                    <li class='foot-info'><a href="{% url 'home:programs' %}" alt="health">Health</a></li>
+                    <li class='foot-info'><a href="{% url 'home:programs' %}" alt="sustainability">Sustainable Development</a></li>
+                    <li class='foot-info' title="Orphanned and Vulnerable Children"><a href="{% url 'home:programs' %}" alt="OVC Programs">OVC</a></li>
+                    <li class='foot-info' title="Environmental and Wildlife Protection "><a href="{% url 'home:programs' %}" alt="EWP">EWP</a></li>
+                </ul>
+            </div>
+            <div class='footer-content'>
+                <h2>Quick Links</h2>
+                <ul class="footer-links">
+                    <li class='foot-info'><a href="{% url 'home:home' %}" aria-label='About Us'>about us</a></li>
+                    <li class='foot-info'><a href="{% url 'home:programs' %}" aria-label='Our Services'>our programs</a></li>
+                    <li class='foot-info'><a href="{% url 'home:events' %}" aria-label='Events'>upcoming events</a></li>
+                    <li class='foot-info'><a href="{% url 'home:blog' %}" aria-label='Blog page'>our latest blog</a></li>
+                    <li class='foot-info'><a href="{% url 'home:causes' %}" aria-label='Community Challenges/Causes'>causes</a></li>
+                    <li class='foot-info'><a href="{% url 'home:contact' %}" aria-label='Contact Page'>contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class='copyrights'>
+            <aside>
+                <cite title='Saving Our Community'>© SOC 2025, All Rights Reserved</cite>
+            </aside>
+            <aside>
+                 <cite title='Email: samsonphiri0419@gmail.com Contact: +260972100378'>Designed By <strong>Sammy Hills</strong></cite>
+            </aside>
+        </div>
+    </footer>
+
+{# --- Volunteer Popup Modal --- #}
+        <div id="volunteer-popup" class="popup-modal">
+            <div class="popup-content">
+                <button class="popup-close" id="close-volunteer-popup" aria-label="Close volunteer form">&times;</button>
+                <h3>Volunteer Application</h3>
+                <form id="volunteer-form" action="{% url 'home:volunteer_application' %}" method="post"> {# Replace with your actual volunteer submission URL #}
+                    {% csrf_token %} 
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="volunteer-first-name">First Name:</label>
+                            <input type="text" id="volunteer-first-name" name="first_name" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="volunteer-last-name">Last Name:</label>
+                            <input type="text" id="volunteer-last-name" name="last_name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="volunteer-gender">Gender:</label>
+                            <select id="volunteer-gender" name="gender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer_not_to_say">Prefer not to say</option>
+                            </select>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="volunteer-age">Age:</label>
+                            <input type="number" id="volunteer-age" name="age" min="16" required> {# Example: Minimum age 16 #}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="volunteer-contact">Contact Number:</label>
+                            <input type="tel" id="volunteer-contact" name="contact" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="volunteer-email">Email:</label>
+                            <input type="email" id="volunteer-email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-message">Why do you want to volunteer?</label>
+                        <textarea id="volunteer-message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit-volunteer">Submit Application</button>
+                </form>
+            </div>
+        </div>
+
+        {# --- Donation Info Popup Modal --- #}
+        <div id="donate-info-popup" class="popup-modal">
+            <div class="popup-content">
+                <button class="popup-close" id="close-donate-popup" aria-label="Close donation information">&times;</button>
+                <h3>Donation Information</h3>
+                <p>Thank you for considering a donation! You can use the details below. Please use your name or purpose as a reference.</p>
+
+                {% if donation_details.donate_bank_name %}
+                <div class="donation-method">
+                    <h4><i class="fa fa-bank" aria-hidden="true"></i> Bank Transfer</h4>
+                    <dl>
+                        <dt>Bank Name:</dt> <dd>{{ donation_details.donate_bank_name }}</dd>
+                        <dt>Account Name:</dt> <dd>{{ donation_details.donate_account_name }}</dd>
+                        <dt>Account Number:</dt> <dd>{{ donation_details.donate_account_number }}</dd>
+                        {% if donation_details.donate_branch_code %}<dt>Branch Code:</dt> <dd>{{ donation_details.donate_branch_code }}</dd>{% endif %}
+                        {% if donation_details.donate_swift_code %}<dt>SWIFT/BIC Code:</dt> <dd>{{ donation_details.donate_swift_code }}</dd>{% endif %}
+                    </dl>
+                </div>
+                {% endif %}
+
+                {% if donation_details.donate_momo_mtn_number or donation_details.donate_momo_airtel_number or donation_details.donate_momo_zamtel_number %}
+                <div class="donation-method">
+                    <h4><i class="fa fa-mobile" aria-hidden="true"></i> Mobile Money (Zambia)</h4>
+                    {% if donation_details.donate_momo_mtn_number %}
+                    <dl class="mobile-money mtn">
+                        <dt>MTN Mobile Money:</dt>
+                        <dd><strong>Number:</strong> {{ donation_details.donate_momo_mtn_number }}</dd>
+                        {% if donation_details.donate_momo_mtn_name %}<dd><strong>Name:</strong> {{ donation_details.donate_momo_mtn_name }}</dd>{% endif %}
+                    </dl>
+                    {% endif %}
+                    {% if donation_details.donate_momo_airtel_number %}
+                    <dl class="mobile-money airtel">
+                        <dt>Airtel Money:</dt>
+                        <dd><strong>Number:</strong> {{ donation_details.donate_momo_airtel_number }}</dd>
+                        {% if donation_details.donate_momo_airtel_name %}<dd><strong>Name:</strong> {{ donation_details.donate_momo_airtel_name }}</dd>{% endif %}
+                    </dl>
+                    {% endif %}
+                    {% if donation_details.donate_momo_zamtel_number %}
+                    <dl class="mobile-money zamtel">
+                        <dt>Zamtel Kwacha:</dt>
+                        <dd><strong>Number:</strong> {{ donation_details.donate_momo_zamtel_number }}</dd>
+                        {% if donation_details.donate_momo_zamtel_name %}<dd><strong>Name:</strong> {{ donation_details.donate_momo_zamtel_name }}</dd>{% endif %}
+                    </dl>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% if donation_details.donate_contact_number %}
+                <div class="donation-method">
+                    <h4><i class="fa fa-question-circle" aria-hidden="true"></i> Inquiries</h4>
+                    <p>For any questions regarding donations, please contact us at: <a href="tel:{{ donation_details.donate_contact_number }}">{{ donation_details.donate_contact_number }}</a></p>
+                </div>
+                {% endif %}
+
+                {% if donation_details.donate_instructions %}
+                <div class="donation-instructions">
+                    <p><strong>Instructions:</strong> {{ donation_details.donate_instructions|linebreaksbr }}</p>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        {# --- Scripts Section --- #}
+        <script src="{% static 'js/main.js' %}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}{% if object %}Edit Event{% else %}Add New Event{% endif %} | Content Manager{% endblock %}
+
+{% block page_title %}{% if object %}Edit Event: {{ object.title }}{% else %}Add New Event{% endif %}{% endblock %}
+
+{% block content %}
+{# enctype is needed if your EventForm includes an ImageField or FileField #}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {# Render form fields manually for better control with cm_styles.css #}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+        {{ field }}
+        {% if field.errors %}
+            <div class="errors" style="color: red; font-size: 0.9em; margin-top: 4px;">{{ field.errors }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% if object %}Update Event{% else %}Create Event{% endif %}</button>
+        <a href="{% url 'cm_event_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

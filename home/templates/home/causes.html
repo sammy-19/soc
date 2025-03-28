@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Causes | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>Support Our Causes</h1>
+        <p>Help us tackle specific challenges and meet urgent needs in our community.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content causes-page">
+
+    <section class="causes-intro top-spacer">
+        <div class="section-content">
+            <h2>Make a Targeted Impact</h2>
+            <p>{{ intro_text|default:"Default causes intro text."|linebreaksbr }}</p>
+        </div>
+    </section>
+
+    <section class="causes-grid-section top-spacer light-bg">
+        <div class="section-content-wide">
+             {% if not causes %}
+                 <p style="text-align: center; margin-top: 20px;">Information about specific causes is coming soon.</p>
+            {% endif %}
+
+            <div class="causes-grid grid-wrapper">
+                {# Loop through causes from context #}
+                {% for cause in causes %}
+                <article class="cause-item program"> {# Reusing .program style #}
+                     {% if cause.image %}
+                        <img src="{{ cause.image.url }}" alt="{{ cause.title }}">
+                    {% else %}
+                         <img src="{% static 'images/placeholder_cause.png' %}" alt="{{ cause.title }}"> {# Default image #}
+                    {% endif %}
+                    <h4>{{ cause.title }}</h4>
+                    <figcaption>
+                       {{ cause.description|linebreaksbr }}
+                    </figcaption>
+                    {% if cause.goal_description %}
+                         <div class="cause-goal">{{ cause.goal_description }}</div>
+                    {% endif %}
+                     {# Add progress bar here if implementing #}
+                     {# <div class="progress-bar"><div class="progress" style="width: ...%;"></div></div> #}
+                    {% if cause.donation_link %}
+                        <a href="{{ cause.donation_link }}" target="_blank" rel="noopener noreferrer" class="btn-cause-donate">Support This Cause</a>
+                    {% else %}
+                         {# Link to general donation or homepage section #}
+                         <a href="{% url 'home:home' %}#donate-section-anchor" class="btn-cause-donate">Donate Now</a>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+     <section class="general-donation-cta top-spacer">
+         <div class="section-content">
+            <h2>Support Our General Fund</h2>
+            <p>Can't decide on a specific cause? A donation to our general fund allows us to allocate resources where they are needed most urgently across all our programs.</p>
+            <a href="{% url 'home:home' %}#donate-section-anchor" class="btn-donate-action">Donate to General Fund</a>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

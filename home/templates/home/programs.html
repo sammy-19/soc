@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Programs | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>Our Programs</h1>
+        <p>Discover the core initiatives we run to empower the community.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content programs-page">
+
+    <section class="program-intro top-spacer">
+        <div class="section-content">
+            <h2>Driving Sustainable Change</h2>
+            <p>{{ intro_text|default:"Default programs intro text."|linebreaksbr }}</p>
+        </div>
+    </section>
+
+    {# Loop through programs from context #}
+    {% for program in programs %}
+    {# Use cycle tag to alternate background class #}
+    <section id="program-{{ program.pk }}" class="program-detail top-spacer {% cycle 'light-bg' '' %}">
+        {# Use cycle tag to alternate layout class #}
+        <div class="section-content-wide flex-wrapper {% cycle 'program-layout-alt' 'program-layout' %}">
+
+            <div class="program-image">
+                {% if program.image %}
+                     <img src="{{ program.image.url }}" alt="{{ program.name }}">
+                {% else %}
+                     <img src="{% static 'images/placeholder_program.png' %}" alt="{{ program.name }}"> {# Default image #}
+                {% endif %}
+            </div>
+            <div class="program-text">
+                <h3>
+                    {# You might want icons specific to programs - could add an icon field to Program model #}
+                    <i class="fa fa-tasks" aria-hidden="true"></i> {{ program.name }}
+                </h3>
+                <p>
+                    {{ program.full_description|linebreaksbr }}
+                </p>
+                {% if program.key_activities %}
+                <h4>Key Activities:</h4>
+                <ul>
+                    {# Split key activities by newline and display as list items #}
+                    {% for activity in program.key_activities.splitlines %}
+                         {% if activity %} {# Only display non-empty lines #}
+                             <li>{{ activity }}</li>
+                         {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                 {# Optional: Add a specific call to action or link #}
+                 {# <a href="#" class="btn-program-support">Support This Program</a> #}
+            </div>
+
+        </div>
+    </section>
+    {% empty %}
+     <section class="top-spacer">
+        <div class="section-content">
+             <p style="text-align: center;">Details about our programs are coming soon.</p>
+        </div>
+     </section>
+    {% endfor %}
+
+
+     <section class="program-cta top-spacer">
+        <div class="section-content">
+            <h2>Get Involved</h2>
+            <p>Your support allows us to continue and expand these vital programs. Consider donating or volunteering today.</p>
+            <a href="{% url 'home:contact' %}" class="btn-volunteer-action" style="margin-right: 10px;">Volunteer With Us</a>
+            <a href="{% url 'home:home' %}#donate-section-anchor" class="btn-donate-action">Donate Now</a> {# Link to section on homepage #}
+        </div>
+    </section>
+
+</div>
+{% endblock %}

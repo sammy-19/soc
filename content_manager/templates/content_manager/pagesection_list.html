@@ -1,0 +1,43 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Manage Page Sections | Content Manager{% endblock %}
+
+{% block page_title %}Manage Page Sections{% endblock %}
+
+{% block content %}
+<div class="action-bar">
+    {# Usually sections are pre-defined, adding new ones might be rare via UI #}
+    {# <a href="#" class="btn btn-primary">Add New Section</a> #}
+    <p>Edit the content for pre-defined page sections.</p>
+</div>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Section Key</th>
+            <th>Title (Optional)</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for section in sections %} {# Corresponds to context_object_name in ListView #}
+        <tr>
+            <td>{{ section.section_key }}</td>
+            <td>{{ section.title|default:"--" }}</td>
+            <td>{{ section.updated_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                <a href="{% url 'cm_section_edit' section.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                {# Deleting sections is usually risky - maybe disable/hide delete button #}
+                {# <a href="#" class="btn btn-sm btn-danger">Delete</a> #}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No page sections found. (Consider creating them via admin or fixtures).</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

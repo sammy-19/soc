@@ -1,0 +1,51 @@
+{# templates/registration/login.html #}
+{% extends "base.html" %} {# Or your main site base, or a simpler one #}
+
+{% block title %}Login | SOC{% endblock %}
+
+{% block main %}
+<div class="main-body-content login-page" style="padding: 50px 15px; max-width: 500px; margin: 40px auto; background-color: #f7f7f7; border-radius: 8px;">
+    <h2 style="text-align: center; color: navy;">Login to Content Manager</h2>
+
+    {% if form.errors %}
+        <p style="color: red; text-align: center;">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p style="text-align: center;">Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p style="text-align: center;">Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <div class="form-group" style="margin-bottom: 15px;">
+             <label for="{{ form.username.id_for_label }}">Username:</label>
+             {{ form.username }}
+         </div>
+         <div class="form-group" style="margin-bottom: 20px;">
+             <label for="{{ form.password.id_for_label }}">Password:</label>
+             {{ form.password }}
+         </div>
+
+        {# Assumes you setup the password_reset patterns if using this #}
+        {# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+
+        <button type="submit" class="btn-submit-login" style="display: block; width: 100%; padding: 10px; background-color: navy; color: white; border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer;">Login</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+</div>
+<style>
+    /* Minimal styles for the form elements if needed */
+    .login-page .form-group input {
+        width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+    }
+    .login-page .form-group label { display: block; margin-bottom: 5px; font-weight: bold;}
+</style>
+
+{% endblock %}

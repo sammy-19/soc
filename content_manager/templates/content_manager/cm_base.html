@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Content Manager{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'content_manager/css/cm_styles.css' %}">
+    </head>
+    <body>
+        <div class="cm-container">
+            <aside class="cm-sidebar">
+                <h2><a href="{% url 'cm_dashboard' %}">Content Manager</a></h2>
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'cm_dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'cm_blog_list' %}">Manage Blog Posts</a></li>
+                        <li><a href="{% url 'cm_event_list' %}">Manage Events</a></li>
+                        <li><a href="{% url 'cm_section_list' %}">Manage Page Sections</a></li>
+                        <li><a href="{% url 'cm_program_list' %}">Programs</a></li>
+                        <li><a href="{% url 'cm_cause_list' %}">Causes</a></li>
+                        <li><a href="{% url 'cm_teammember_list' %}">Team Members</a></li>
+                        <li><a href="{% url 'cm_value_list' %}">Core Values</a></li>
+                        <li><a href="{% url 'cm_achievement_list' %}">Achievements</a></li>
+                    </ul>
+                </nav>
+                <div class="cm-user-info">
+                    {% if user.is_authenticated %}
+                    <p>User: {{ user.username }}</p>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                    {% endif %}
+                </div>
+            </aside>
+            <main class="cm-main-content">
+                <header class="cm-header">
+                    <h1>{% block page_title %}{% endblock %}</h1>
+                </header>
+                <section class="cm-content-area">
+                    {% block content %}
+                    {% endblock %}
+                </section>
+            </main>
+        </div>
+        <script src="{% static 'content_manager/js/cm_script.js' %}"></script> {# Optional JS #}
+    </body>
+</html>

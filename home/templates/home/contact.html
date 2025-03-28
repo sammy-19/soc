@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | Saving Our Community{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>Get In Touch</h1>
+        <p>We'd love to hear from you. Reach out with questions, comments, or partnership inquiries.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content contact-page">
+
+    <section class="contact-details-form top-spacer">
+        <div class="section-content-wide flex-wrapper">
+
+            <div class="contact-info-block">
+                <h2>Contact Information</h2>
+                <p>Feel free to reach us through any of the following methods:</p>
+
+                <div class="info-item">
+                    <i class="fa fa-map-marker icon-contact" aria-hidden="true"></i>
+                    <div>
+                        <strong>Address:</strong><br>
+                        {{ contact_address|linebreaksbr }} {# Use context variable #}
+                    </div>
+                </div>
+                 <div class="info-item">
+                    <i class="fa fa-phone icon-contact" aria-hidden="true"></i>
+                     <div>
+                        <strong>Phone:</strong><br>
+                        {# Make phone numbers clickable #}
+                        {% for phone in contact_phone.splitlines %}
+                            <a href="tel:{{ phone }}"> {{ phone }} </a> <br>
+                        {% endfor %}
+                    </div>
+                </div>
+                 <div class="info-item">
+                    <i class="fa fa-envelope icon-contact" aria-hidden="true"></i>
+                     <div>
+                        <strong>Email:</strong><br>
+                         {# Make email clickable #}
+                        <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>
+                    </div>
+                </div>
+                {# ... Social links ... #}
+            </div>
+
+            <div class="contact-form-block">
+                <h2>Send Us a Message</h2>
+                 {# The view now handles POST and passes form instance #}
+                 <form id="contact-main-form" action="{% url 'home:contact' %}" method="post">
+                    {% csrf_token %}
+                    {# Render form fields manually or using {{ contact_form.as_p }} #}
+                    {{ contact_form.as_p }}
+                    <button type="submit" class="btn-submit-contact">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    {% if map_embed_code %} {# Display map only if embed code exists #}
+    <section class="map-section top-spacer">
+        <h2>Find Us on the Map</h2>
+        <div class="map-container">
+            {{ map_embed_code|safe }} {# Use safe filter for HTML embed code #}
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+{% endblock %}

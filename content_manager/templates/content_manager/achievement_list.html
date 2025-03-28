@@ -1,0 +1,39 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Manage Achievements | Content Manager{% endblock %}
+
+{% block page_title %}Manage Achievements{% endblock %}
+
+{% block content %}
+<div class="action-bar">
+    <a href="{% url 'cm_achievement_new' %}" class="btn btn-primary">Add New Achievement</a>
+</div>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for achievement in achievements %} {# Use context_object_name from view #}
+        <tr>
+            <td>{{ achievement.title }}</td>
+            <td>{{ achievement.display_order }}</td>
+            <td>{% if achievement.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'cm_achievement_edit' achievement.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="{% url 'cm_achievement_delete' achievement.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No achievements found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

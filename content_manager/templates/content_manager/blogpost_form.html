@@ -1,0 +1,37 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}
+    {% if object %} Edit Blog Post
+    {% else %} Add Blog Post
+    {% endif %}
+     | Content Manager
+{% endblock %}
+
+{% block page_title %}
+    {% if object %}Edit Blog Post: {{ object.title }}
+    {% else %}Add New Blog Post
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data"> {# Add enctype for file uploads #}
+    {% csrf_token %}
+
+    {# Render form fields manually or using form.as_p / form.as_table #}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+        {{ field }}
+        {% if field.errors %}
+            <div class="errors">{{ field.errors }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% if object %}Update{% else %}Create{% endif %} Post</button>
+        <a href="{% url 'cm_blog_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

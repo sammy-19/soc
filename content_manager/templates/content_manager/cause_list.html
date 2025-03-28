@@ -1,0 +1,39 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Manage Causes | Content Manager{% endblock %}
+
+{% block page_title %}Manage Causes{% endblock %}
+
+{% block content %}
+<div class="action-bar">
+    <a href="{% url 'cm_cause_new' %}" class="btn btn-primary">Add New Cause</a>
+</div>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cause in causes %} {# Use context_object_name from view #}
+        <tr>
+            <td>{{ cause.title }}</td>
+            <td>{{ cause.display_order }}</td>
+            <td>{% if cause.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'cm_cause_edit' cause.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="{% url 'cm_cause_delete' cause.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No causes found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
