@@ -1,0 +1,31 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}{% if object %}Edit Banner Slide{% else %}Add New Banner Slide{% endif %} | Content Manager{% endblock %}
+
+{% block page_title %}{% if object %}Edit Slide: {{ object.title }}{% else %}Add New Banner Slide{% endif %}{% endblock %}
+
+{% block content %}
+{# enctype is needed for image upload #}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {# Show current image if editing #}
+        {% if field.name == 'image' and object.image %}
+           <div style="margin: 5px 0;">Current: <a href="{{ object.image.url }}" target="_blank">{{ object.image.name }}</a> <img src="{{ object.image.url }}" alt="Current image" height="50" style="vertical-align: middle; margin-left: 10px;"></div> Change:
+        {% endif %}
+
+        {% if field.help_text %}<small class="help-text">{{ field.help_text }}</small>{% endif %}
+        {{ field }}
+        {% if field.errors %}
+            <div class="errors" style="color: red; font-size: 0.9em; margin-top: 4px;">{{ field.errors }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% if object %}Update Slide{% else %}Create Slide{% endif %}</button>
+        <a href="{% url 'cm_bannerslide_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{% endblock %}

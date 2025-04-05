@@ -135,11 +135,19 @@ class Achievement(models.Model):
 
 
 class BannerSlide(models.Model):
+    ACTION_CHOICES = [
+        ('link', 'Link'),
+        ('donate', 'Open Donate Popup'),
+        ('volunteer', 'Open Volunteer Popup'),
+        # Add more actions if needed
+    ]
+
     title = models.CharField(max_length=150)
     text = models.TextField(max_length=300, blank=True)
     image = models.ImageField(upload_to='banner_images/', help_text="Recommended size: e.g., 1920x800 pixels")
-    button_text = models.CharField(max_length=50, blank=True, default="Donate Now")
-    button_link = models.CharField(max_length=255, blank=True, default="#donate-section-anchor", help_text="URL or #anchor for the button")
+    button_text = models.CharField(max_length=50, blank=True, default="Learn More") # More generic default
+    button_link = models.CharField(max_length=255, blank=True, default="#", help_text="URL (#anchor, page URL) or leave '#' for popup actions")
+    button_action = models.CharField(max_length=20, choices=ACTION_CHOICES, default='link', help_text="What should the button do?")
     display_order = models.PositiveIntegerField(default=0, help_text="Order of appearance (lower numbers first).")
     is_active = models.BooleanField(default=True, help_text="Show this slide on the website.")
 

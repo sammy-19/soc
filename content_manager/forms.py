@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement
+from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
@@ -74,4 +74,19 @@ class AchievementForm(forms.ModelForm):
         fields = ['title', 'description', 'image', 'display_order', 'is_active']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
+        }
+        
+class BannerSlideForm(forms.ModelForm):
+    class Meta:
+        model = BannerSlide
+        fields = [
+            'title', 'text', 'image', 'button_text',
+            'button_link', 'button_action', 'display_order', 'is_active'
+        ]
+        widgets = {
+            'text': forms.Textarea(attrs={'rows': 4}), # Adjust rows as needed
+        }
+        help_texts = { # Optional: Add specific help text here too
+            'button_link': "Enter full URL (e.g., https://...) or an anchor (#your-id) or leave '#' for popup actions.",
+            'button_action': "Choose 'Open Donate Popup' or 'Open Volunteer Popup' if button_link is '#' and should trigger a popup."
         }

@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin # For permissions
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement
-from .forms import BlogPostForm, EventForm, PageSectionForm, ProgramForm, CauseForm, TeamMemberForm, ValueForm, AchievementForm
+from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
+from .forms import BlogPostForm, EventForm, PageSectionForm, ProgramForm, CauseForm, TeamMemberForm, ValueForm, AchievementForm, BannerSlideForm
 
-# Create your views here.
 
 # Mixin to check for staff status (or define custom groups/permissions)
 class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -216,3 +215,27 @@ class AchievementDeleteView(StaffRequiredMixin, DeleteView):
     model = Achievement
     template_name = 'content_manager/confirm_delete.html'
     success_url = reverse_lazy('cm_achievement_list')
+    
+# --- Banner Slide Management ---
+class BannerSlideListView(StaffRequiredMixin, ListView):
+    model = BannerSlide
+    template_name = 'content_manager/bannerslide_list.html' # Template we will create
+    context_object_name = 'slides'
+    ordering = ['display_order']
+
+class BannerSlideCreateView(StaffRequiredMixin, CreateView):
+    model = BannerSlide
+    form_class = BannerSlideForm
+    template_name = 'content_manager/bannerslide_form.html' # Template we will create
+    success_url = reverse_lazy('cm_bannerslide_list')
+
+class BannerSlideUpdateView(StaffRequiredMixin, UpdateView):
+    model = BannerSlide
+    form_class = BannerSlideForm
+    template_name = 'content_manager/bannerslide_form.html'
+    success_url = reverse_lazy('cm_bannerslide_list')
+
+class BannerSlideDeleteView(StaffRequiredMixin, DeleteView):
+    model = BannerSlide
+    template_name = 'content_manager/confirm_delete.html' # Reuse generic confirm delete
+    success_url = reverse_lazy('cm_bannerslide_list')

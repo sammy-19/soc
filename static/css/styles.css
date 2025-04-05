@@ -131,6 +131,10 @@ nav li:hover a {
     margin-top: 20px; /* Add some space above */
 }
 
+#donate-info-popup {
+    background-color: #000080;
+}
+
 /* Donate popup section */
 #donate-info-popup .popup-content {
     max-width: 550px; /* Adjust width as needed */

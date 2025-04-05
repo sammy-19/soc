@@ -1,0 +1,50 @@
+{% extends 'content_manager/cm_base.html' %}
+{% load static %} {# Load static if displaying images #}
+
+{% block title %}Manage Banner Slides | Content Manager{% endblock %}
+
+{% block page_title %}Manage Banner Slides{% endblock %}
+
+{% block content %}
+<div class="action-bar">
+    <a href="{% url 'cm_bannerslide_new' %}" class="btn btn-primary">Add New Banner Slide</a>
+</div>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Button Action</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for slide in slides %} {# Use context_object_name from view #}
+        <tr>
+            <td>
+                {% if slide.image %}
+                    <img src="{{ slide.image.url }}" alt="{{ slide.title|slice:':20' }}" height="40">
+                {% else %}
+                    (No image)
+                {% endif %}
+            </td>
+            <td>{{ slide.title }}</td>
+            <td>{{ slide.display_order }}</td>
+            <td>{{ slide.get_button_action_display }}</td> {# Show display value of choice field #}
+            <td>{% if slide.is_active %}Active{% else %}Inactive{% endif %}</td>
+            <td>
+                <a href="{% url 'cm_bannerslide_edit' slide.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                <a href="{% url 'cm_bannerslide_delete' slide.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No banner slides found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

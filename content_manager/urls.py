@@ -50,4 +50,10 @@ urlpatterns = [
     path('achievements/new/', views.AchievementCreateView.as_view(), name='cm_achievement_new'),
     path('achievements/edit/<int:pk>/', views.AchievementUpdateView.as_view(), name='cm_achievement_edit'),
     path('achievements/delete/<int:pk>/', views.AchievementDeleteView.as_view(), name='cm_achievement_delete'),
+    
+     # Banner Slides
+    path('banners/', views.BannerSlideListView.as_view(), name='cm_bannerslide_list'),
+    path('banners/new/', views.BannerSlideCreateView.as_view(), name='cm_bannerslide_new'),
+    path('banners/edit/<int:pk>/', views.BannerSlideUpdateView.as_view(), name='cm_bannerslide_edit'),
+    path('banners/delete/<int:pk>/', views.BannerSlideDeleteView.as_view(), name='cm_bannerslide_delete'),
 ]

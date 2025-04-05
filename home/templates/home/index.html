@@ -7,12 +7,30 @@
 {% block banner %}
     <div class='banner-content'>
         {# Use variables from context #}
-        <h1>{{ banner_title|default:"Get Involved with a helping hand" }}</h1>
-        <p>{{ banner_text|default:"Placeholder text if banner_text is missing."|linebreaksbr }}</p>
-        <aside id='donate' class='donate'><a href="#" id="banner-button" class='trigger-donate-popup'>Donate Now</a></aside>
-        <aside id='prev' class='btn fa fa-chevron-left' aria-label="Previous Slide"></aside>
-        <aside id='next' class='btn fa fa-chevron-right' aria-label="Next Slide"></aside>
+        <div class='banner-content' id="banner-content-dynamic">
+            <h1 id="banner-title"></h1>   {# Populated by JS #}
+            <p id="banner-text"></p>    {# Populated by JS #}
+            <a href="#" id="banner-button" class='donate'></a> {# Populated by JS #}
+            <aside id='prev' class='btn fa fa-chevron-left' aria-label="Previous Slide"></aside>
+            <aside id='next' class='btn fa fa-chevron-right' aria-label="Next Slide"></aside>
+        </div>
     </div>
+     {# --- Pass Slide Data to JavaScript --- #}
+     <script id="slide-data" type="application/json">
+        [
+            {% for slide in active_slides %}
+            {
+                "title": "{{ slide.title|escapejs }}",
+                "text": "{{ slide.text|escapejs|linebreaksbr }}",
+                "image_url": "{{ slide.image.url }}",
+                "button_text": "{{ slide.button_text|escapejs }}",
+                "button_link": "{{ slide.button_link|escapejs }}",
+                "button_action": "{{ slide.get_button_action_display|escapejs }}" {# Use display value #}
+                {# If you didn't add button_action field, you'll determine action in JS #}
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ]
+    </script>
 {% endblock %}
 
 {% block main %}
