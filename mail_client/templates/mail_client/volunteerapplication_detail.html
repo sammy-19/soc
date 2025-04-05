@@ -1,0 +1,44 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Volunteer Application: {{ application.first_name }} {{ application.last_name }} | Mailbox{% endblock %}
+
+{% block page_title %}Volunteer Application: {{ application.first_name }} {{ application.last_name }}{% endblock %}
+
+{% block content %}
+<div class="detail-view">
+    <p><a href="{% url 'mail_client:volunteer_list' %}" class="btn btn-sm btn-secondary">&laquo; Back to Applications</a></p>
+
+    <dl class="detail-list">
+        <dt>Full Name:</dt><dd>{{ application.first_name }} {{ application.last_name }}</dd>
+        <dt>Gender:</dt><dd>{{ application.get_gender_display }}</dd> {# Use display value #}
+        <dt>Age:</dt><dd>{{ application.age }}</dd>
+        <dt>Contact:</dt><dd>{{ application.contact_number }}</dd>
+        <dt>Email:</dt><dd><a href="mailto:{{ application.email }}">{{ application.email }}</a></dd>
+        <dt>Submitted:</dt><dd>{{ application.submitted_at|date:"Y-m-d H:i:s" }}</dd>
+        <dt>Reason:</dt><dd style="white-space: pre-wrap; background: #f8f9fa; padding: 10px; border-radius: 4px;">{{ application.message }}</dd>
+        <dt>Current Status:</dt><dd><strong>{{ application.get_status_display }}</strong></dd>
+    </dl>
+
+    <hr style="margin: 30px 0;">
+
+    <h4>Update Application Status</h4>
+    <form method="post" action="{% url 'mail_client:volunteer_detail' application.pk %}" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group" style="margin-right: 10px;">
+            <label for="id_status" style="margin-right: 5px;">New Status:</label>
+            <select name="status" id="id_status" required>
+                {% for value, text in status_choices %}
+                    <option value="{{ value }}" {% if value == application.status %}selected{% endif %}>{{ text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Status</button>
+    </form>
+
+</div>
+<style> /* Simple detail list styling */
+    .detail-list dt { font-weight: bold; margin-top: 10px; color: #444; }
+    .detail-list dd { margin-left: 0; margin-bottom: 10px; color: #333; }
+    .form-inline { display: flex; align-items: center; }
+</style>
+{% endblock %}

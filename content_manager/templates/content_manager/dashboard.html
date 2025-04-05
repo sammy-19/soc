@@ -48,5 +48,10 @@
         <p>{{ achievement_count }}</p>
         <a href="{% url 'cm_achievement_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+    <div class="summary-item">
+        <h3>Banner Elements</h3>
+        <p>{{ bannerslide_count }}</p>
+        <a href="{% url 'cm_bannerslide_list' %}" class="btn btn-secondary">Manage</a>
+    </div>
 </div>
 {% endblock %}

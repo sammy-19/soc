@@ -1,0 +1,27 @@
+{% extends 'content_manager/cm_base.html' %}
+
+{% block title %}Mailbox Dashboard | Content Manager{% endblock %}
+
+{% block page_title %}Mailbox Dashboard{% endblock %}
+
+{% block content %}
+<p>Overview of website submissions.</p>
+
+<div class="dashboard-summary">
+    <div class="summary-item">
+        <h3>Contact Messages</h3>
+        <p><strong>{{ unread_message_count }}</strong> Unread / {{ total_messages }} Total</p>
+        <a href="{% url 'mail_client:message_list' %}" class="btn btn-secondary">View Messages</a>
+    </div>
+    <div class="summary-item">
+        <h3>Feedback</h3>
+        <p><strong>{{ unreviewed_feedback_count }}</strong> Unreviewed / {{ total_feedback }} Total</p>
+         <a href="{% url 'mail_client:feedback_list' %}" class="btn btn-secondary">View Feedback</a>
+    </div>
+     <div class="summary-item">
+        <h3>Volunteer Apps</h3>
+        <p><strong>{{ pending_volunteer_count }}</strong> Pending / {{ total_volunteers }} Total</p>
+         <a href="{% url 'mail_client:volunteer_list' %}" class="btn btn-secondary">View Applications</a>
+    </div>
+</div>
+{% endblock %}

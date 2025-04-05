@@ -7,6 +7,7 @@ from content_manager.models import (
     BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
 )
 from .forms import ContactForm, FeedbackForm, VolunteerForm
+from mail_client.models import FeedbackSubmission, ContactMessage, VolunteerApplication
 
 # Helper function to get PageSection content safely
 def get_section(key):
@@ -32,17 +33,24 @@ def home(request):
 
     # Feedback Form Handling (Example integrated here)
     feedback_form = FeedbackForm() # Instantiate for GET request
-    if request.method == 'POST' and 'submit_feedback' in request.POST: # Check if feedback form was submitted
+    if request.method == 'POST' and 'submit_feedback' in request.POST:
         feedback_form = FeedbackForm(request.POST)
         if feedback_form.is_valid():
-            # Process feedback data (e.g., send email, save to a simple model)
-            name = feedback_form.cleaned_data['full_name']
-            email = feedback_form.cleaned_data['email']
-            message_body = feedback_form.cleaned_data['message']
-            print(f"Feedback from {name} ({email}): {message_body}")
-
-            messages.success(request, "Thank you for your feedback!") # Simple success message
-            return redirect('home:home') # Redirect to home to prevent resubmission
+            # --- SAVE FEEDBACK TO MAILBOX ---
+            try:
+                FeedbackSubmission.objects.create(
+                    name=feedback_form.cleaned_data['full_name'],
+                    email=feedback_form.cleaned_data['email'],
+                    message=feedback_form.cleaned_data['message']
+                )
+                messages.success(request, "Thank you for your feedback!")
+            except Exception as e:
+                print(f"Error saving feedback: {e}") # Log error
+                messages.error(request, "Sorry, there was an error submitting your feedback.")
+            # ----------------------------------
+            return redirect('home:home') # Redirect to prevent resubmission
+        else:
+            messages.error(request, "Please correct the errors in the feedback form.")
 
     context = {
         'banner_title': banner_title_section.title if banner_title_section else "[Banner Title]",
@@ -106,30 +114,22 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Process contact form data (e.g., send email)
-            name = form.cleaned_data['full_name']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            message_body = form.cleaned_data['message']
-            print(f"Contact Form from {name} ({email}) - Subject: {subject}")
-            # Example: Send email
-            # try:
-            #     send_mail(
-            #         f'Website Contact: {subject}',
-            #         f'From: {name} <{email}>\n\nMessage:\n{message_body}',
-            #         settings.DEFAULT_FROM_EMAIL,
-            #         [settings.CONTACT_EMAIL], # Add CONTACT_EMAIL to settings.py
-            #         fail_silently=False,
-            #     )
-            #     messages.success(request, "Thank you for your message! We will get back to you soon.")
-            # except Exception as e:
-            #     print(f"Error sending contact email: {e}")
-            #     messages.error(request, "Sorry, there was an error sending your message.")
-
-            messages.success(request, "Thank you for your message! We will get back to you soon.") # Simple success
-            return redirect('home:contact') # Redirect to clear form after POST
+            # --- SAVE CONTACT MESSAGE TO MAILBOX ---
+            try:
+                ContactMessage.objects.create(
+                    name=form.cleaned_data['full_name'],
+                    email=form.cleaned_data['email'],
+                    subject=form.cleaned_data['subject'],
+                    message=form.cleaned_data['message']
+                )
+                messages.success(request, "Thank you for your message! We will get back to you soon.")
+            except Exception as e:
+                print(f"Error saving contact message: {e}")
+                messages.error(request, "Sorry, there was an error sending your message.")
+            # -------------------------------------
+            return redirect('home:contact') # Redirect to clear form
         else:
-             messages.error(request, "Please correct the errors below.") # Show errors if form invalid
+             messages.error(request, "Please correct the errors below.")
     else:
         form = ContactForm() # Empty form for GET request
 
@@ -163,34 +163,29 @@ def causes(request):
 # --- Separate Form Submission Views (Example: Volunteer) ---
 
 def volunteer_application(request):
-    # This view ONLY handles POST requests from the popup form
     if request.method == 'POST':
         form = VolunteerForm(request.POST)
         if form.is_valid():
-            # Process volunteer data (save to DB, send email notification)
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            print(f"Volunteer Application from {first_name} {last_name} ({email})")
-            # Example: Send email
-            # try:
-            #     send_mail(
-            #         'New Volunteer Application',
-            #         f'Details:\n{form.cleaned_data}', # Send all cleaned data
-            #         settings.DEFAULT_FROM_EMAIL,
-            #         [settings.VOLUNTEER_COORDINATOR_EMAIL], # Add VOLUNTEER_COORDINATOR_EMAIL
-            #         fail_silently=False,
-            #     )
-            #     messages.success(request, "Thank you for your application! We will be in touch.")
-            # except Exception as e:
-            #     print(f"Error sending volunteer email: {e}")
-            #     messages.error(request, "Sorry, there was an error submitting your application.")
-
-            messages.success(request, "Thank you for your application! We will be in touch.") # Simple success
+             # --- SAVE VOLUNTEER APP TO MAILBOX ---
+            try:
+                VolunteerApplication.objects.create(
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'],
+                    gender=form.cleaned_data['gender'],
+                    age=form.cleaned_data['age'],
+                    contact_number=form.cleaned_data['contact'],
+                    email=form.cleaned_data['email'],
+                    message=form.cleaned_data['message']
+                    # Status defaults to 'Pending'
+                )
+                messages.success(request, "Thank you for your application! We will be in touch.")
+            except Exception as e:
+                print(f"Error saving volunteer application: {e}")
+                messages.error(request, "Sorry, there was an error submitting your application.")
+            # -------------------------------------
         else:
-            # Handle invalid form submission from popup (less common, basic validation is client-side)
-            # You might flash an error message, but redirecting is simplest
              messages.error(request, "Please correct the errors in the volunteer form.")
+
 
     # Redirect back to the page the user came from, or homepage as fallback
     # This prevents direct access via GET and handles completion of POST

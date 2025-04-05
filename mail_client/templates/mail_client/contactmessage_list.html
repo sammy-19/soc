@@ -1,0 +1,47 @@
+{% extends 'content_manager/cm_base.html' %}
+{% load static %}
+
+{% block title %}Contact Messages | Mailbox{% endblock %}
+
+{% block page_title %}Contact Messages{% endblock %}
+
+{% block content %}
+<style>
+    .unread td { font-weight: bold; } /* Simple style for unread */
+</style>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>From</th>
+            <th>Email</th>
+            <th>Received</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for msg in messages %} {# context_object_name is 'messages' #}
+        <tr class="{% if not msg.is_read %}unread{% endif %}">
+            <td>{{ msg.subject|truncatechars:50 }}</td>
+            <td>{{ msg.name }}</td>
+            <td>{{ msg.email }}</td>
+            <td>{{ msg.received_at|date:"Y-m-d H:i" }}</td>
+            <td>{% if msg.is_read %}Read{% else %}Unread{% endif %}</td>
+            <td>
+                <a href="{% url 'mail_client:message_detail' msg.pk %}" class="btn btn-sm btn-secondary">View</a>
+                {# Add delete maybe? Or mark unread? #}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No contact messages found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include "content_manager/_pagination.html" %} {# Assumes you have a pagination include #}
+
+{% endblock %}

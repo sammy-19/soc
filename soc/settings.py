@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'home',
     'content_manager',
+    'mail_client',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

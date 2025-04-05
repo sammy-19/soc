@@ -1,0 +1,47 @@
+{% extends 'content_manager/cm_base.html' %}
+{% load static %}
+
+{% block title %}Volunteer Applications | Mailbox{% endblock %}
+
+{% block page_title %}Volunteer Applications{% endblock %}
+
+{% block content %}
+<style>
+    .pending td { font-weight: bold; background-color: #fffbdd !important; } /* Highlight pending */
+</style>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Submitted</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for app in applications %} {# context_object_name is 'applications' #}
+        <tr class="{% if app.status == 'Pending' %}pending{% endif %}"> {# Highlight pending #}
+            <td>{{ app.first_name }} {{ app.last_name }}</td>
+            <td>{{ app.email }}</td>
+            <td>{{ app.contact_number }}</td>
+            <td>{{ app.submitted_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ app.get_status_display }}</td> {# Show display value of choice #}
+            <td>
+                <a href="{% url 'mail_client:volunteer_detail' app.pk %}" class="btn btn-sm btn-secondary">View/Update</a>
+                {# Add delete maybe? #}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No volunteer applications found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include "content_manager/_pagination.html" %} {# Use pagination include #}
+
+{% endblock %}

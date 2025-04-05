@@ -48,7 +48,7 @@
                         <a href="{{ cause.donation_link }}" target="_blank" rel="noopener noreferrer" class="btn-cause-donate">Support This Cause</a>
                     {% else %}
                          {# Link to general donation or homepage section #}
-                         <a href="{% url 'home:home' %}#donate-section-anchor" class="btn-cause-donate">Donate Now</a>
+                         <a href="#" class="trigger-donate-popup btn-cause-donate">Donate Now</a>
                     {% endif %}
                 </article>
                 {% endfor %}
@@ -60,7 +60,7 @@
          <div class="section-content">
             <h2>Support Our General Fund</h2>
             <p>Can't decide on a specific cause? A donation to our general fund allows us to allocate resources where they are needed most urgently across all our programs.</p>
-            <a href="{% url 'home:home' %}#donate-section-anchor" class="btn-donate-action">Donate to General Fund</a>
+            <a href="#" class="trigger-donate-popup btn-donate-action">Donate to General Fund</a>
         </div>
     </section>
 

@@ -1,0 +1,44 @@
+{# content_manager/templates/content_manager/_pagination.html #}
+{% if is_paginated %}
+<nav aria-label="Page navigation" style="margin-top: 20px; text-align: center;">
+  <ul class="pagination" style="display: inline-block; padding-left: 0; list-style: none; border-radius: 4px;">
+    {% if page_obj.has_previous %}
+      <li class="page-item" style="display: inline;">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&amp;{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Previous" style="padding: 8px 12px; margin-left: 0; border: 1px solid #dee2e6; color: #007bff; text-decoration: none;">
+              <span aria-hidden="true">&laquo;</span>
+          </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled" style="display: inline;">
+          <span class="page-link" style="padding: 8px 12px; margin-left: 0; border: 1px solid #dee2e6; color: #6c757d; background-color: #fff;">&laquo;</span>
+      </li>
+    {% endif %}
+
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="page-item active" style="display: inline;">
+            <span class="page-link" style="padding: 8px 12px; border: 1px solid #007bff; background-color: #007bff; color: white; z-index: 1;">{{ i }}</span>
+        </li>
+      {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+         <li class="page-item" style="display: inline;">
+             <a class="page-link" href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&amp;{{ key }}={{ value }}{% endif %}{% endfor %}" style="padding: 8px 12px; border: 1px solid #dee2e6; color: #007bff; text-decoration: none;">{{ i }}</a>
+         </li>
+      {% elif i == page_obj.number|add:'-3' or i == page_obj.number|add:'3' %}
+         <li class="page-item disabled" style="display: inline;"><span class="page-link" style="padding: 8px 12px; border: 1px solid #dee2e6; color: #6c757d;">&hellip;</span></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item" style="display: inline;">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&amp;{{ key }}={{ value }}{% endif %}{% endfor %}" aria-label="Next" style="padding: 8px 12px; border: 1px solid #dee2e6; color: #007bff; text-decoration: none;">
+              <span aria-hidden="true">&raquo;</span>
+          </a>
+      </li>
+    {% else %}
+       <li class="page-item disabled" style="display: inline;">
+           <span class="page-link" style="padding: 8px 12px; border: 1px solid #dee2e6; color: #6c757d; background-color: #fff;">&raquo;</span>
+       </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

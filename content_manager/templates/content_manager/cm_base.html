@@ -1,52 +1,72 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Content Manager{% endblock %}</title>
-        <link rel="stylesheet" href="{% static 'content_manager/css/cm_styles.css' %}">
-    </head>
-    <body>
-        <div class="cm-container">
-            <aside class="cm-sidebar">
-                <h2><a href="{% url 'cm_dashboard' %}">Content Manager</a></h2>
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'cm_dashboard' %}">Dashboard</a></li>
-                        <li><a href="{% url 'cm_bannerslide_list' %}">Banner Slides</a></li>
-                        <li><a href="{% url 'cm_blog_list' %}">Manage Blog Posts</a></li>
-                        <li><a href="{% url 'cm_event_list' %}">Manage Events</a></li>
-                        <li><a href="{% url 'cm_section_list' %}">Manage Page Sections</a></li>
-                        <li><a href="{% url 'cm_program_list' %}">Programs</a></li>
-                        <li><a href="{% url 'cm_cause_list' %}">Causes</a></li>
-                        <li><a href="{% url 'cm_teammember_list' %}">Team Members</a></li>
-                        <li><a href="{% url 'cm_value_list' %}">Core Values</a></li>
-                        <li><a href="{% url 'cm_achievement_list' %}">Achievements</a></li>
-                    </ul>
-                </nav>
-                <div class="cm-user-info">
-                    {% if user.is_authenticated %}
-                    <p>User: {{ user.username }}</p>
-                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-button">Logout</button>
-                    </form>
-                    {% else %}
-                    <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
-                    {% endif %}
-                </div>
-            </aside>
-            <main class="cm-main-content">
-                <header class="cm-header">
-                    <h1>{% block page_title %}{% endblock %}</h1>
-                </header>
-                <section class="cm-content-area">
-                    {% block content %}
-                    {% endblock %}
-                </section>
-            </main>
-        </div>
-        <script src="{% static 'content_manager/js/cm_script.js' %}"></script> {# Optional JS #}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Content Manager{% endblock %}</title>
+    {# Add Font Awesome if not inheriting from main base #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'content_manager/css/cm_styles.css' %}">
+</head>
+<body>
+    <div class="cm-container">
+        {# --- Sidebar (Visible on Desktop) --- #}
+        <aside class="cm-sidebar" id="cm-sidebar"> {# Keep sidebar structure for desktop #}
+            <div class="cm-sidebar-header">
+                 <h2><a href="{% url 'cm_dashboard' %}">Content Manager</a></h2>
+            </div>
+            {# Give nav an ID and move user info inside #}
+            <nav id="cm-sidebar-nav" style="display: block;">
+                <ul>
+                    <li><a href="{% url 'cm_dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'mail_client:dashboard' %}">Mailbox</a></li>
+                    <li><hr style="border-color: #495057;"></li>
+                    <li><a href="{% url 'cm_bannerslide_list' %}">Banner Slides</a></li>
+                    <li><a href="{% url 'cm_blog_list' %}">Blog Posts</a></li>
+                    <li><a href="{% url 'cm_event_list' %}">Events</a></li>
+                    <li><a href="{% url 'cm_section_list' %}">Page Sections</a></li>
+                    <li><a href="{% url 'cm_program_list' %}">Programs</a></li>
+                    <li><a href="{% url 'cm_cause_list' %}">Causes</a></li>
+                    <li><a href="{% url 'cm_teammember_list' %}">Team Members</a></li>
+                    <li><a href="{% url 'cm_value_list' %}">Core Values</a></li>
+                    <li><a href="{% url 'cm_achievement_list' %}">Achievements</a></li>
+                    <li><hr style="border-color: #495057;"></li> {# Separator before user info #}
+                     {# User Info Moved Here #}
+                    <li class="cm-user-info-mobile"> {# Use a class to style differently if needed #}
+                        {% if user.is_authenticated %}
+                            <span>User: {{ user.username }}</span>
+                            <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 10px;">
+                                 {% csrf_token %}
+                                 <button type="submit" class="logout-button-mobile">Logout</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            {# User info div removed from here #}
+        </aside>
+        {# ------------- #}
+
+        {# --- Main Content --- #}
+        <main class="cm-main-content">
+            <header class="cm-header">
+                 {# Mobile Toggler Button Added Here #}
+                <button class="cm-mobile-toggler" id="cm-mobile-toggler" aria-label="Toggle navigation" aria-expanded="false" aria-controls="cm-sidebar-nav">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+                <h1>{% block page_title %}{% endblock %}</h1>
+            </header>
+            <section class="cm-content-area">
+                {% block content %}
+                {% endblock %}
+            </section>
+        </main>
+        {# ---------------- #}
+    </div>
+
+    <script src="{% static 'content_manager/js/cm_mobile_menu.js' %}"></script> {# Link the new JS file #}
+</body>
 </html>

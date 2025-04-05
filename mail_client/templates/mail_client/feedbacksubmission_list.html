@@ -1,0 +1,45 @@
+{% extends 'content_manager/cm_base.html' %}
+{% load static %}
+
+{% block title %}Feedback Submissions | Mailbox{% endblock %}
+
+{% block page_title %}Feedback Submissions{% endblock %}
+
+{% block content %}
+<style>
+    .unread td { font-weight: bold; } /* Reuse 'unread' class for 'unreviewed' */
+</style>
+
+<table class="cm-table">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>Email</th>
+            <th>Received</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fb in feedbacks %} {# context_object_name is 'feedbacks' #}
+        <tr class="{% if not fb.is_reviewed %}unread{% endif %}"> {# Highlight unreviewed #}
+            <td>{{ fb.name }}</td>
+            <td>{{ fb.email }}</td>
+            <td>{{ fb.received_at|date:"Y-m-d H:i" }}</td>
+            <td>{% if fb.is_reviewed %}Reviewed{% else %}Unreviewed{% endif %}</td>
+            <td>
+                <a href="{% url 'mail_client:feedback_detail' fb.pk %}" class="btn btn-sm btn-secondary">View</a>
+                {# Add delete maybe? Or mark unreviewed? #}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No feedback submissions found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include "content_manager/_pagination.html" %} {# Use pagination include #}
+
+{% endblock %}

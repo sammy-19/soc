@@ -21,6 +21,7 @@ from django.conf.urls.static import static # Required for media files
 
 urlpatterns = [
     path('content-admin/', include('content_manager.urls')),
+    path('mail/', include('mail_client.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
     path('admin/', admin.site.urls),

@@ -19,76 +19,90 @@ a:hover {
     min-height: 100vh;
 }
 
-/* Sidebar */
+/* Sidebar - Base Styles (Desktop) */
 .cm-sidebar {
     width: 240px;
     background-color: #343a40;
     color: #adb5bd;
-    padding: 20px 15px;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    height: 100vh; /* Make sidebar full height */
+    position: sticky; /* Keep sidebar visible when scrolling main content */
+    top: 0;
 }
-.cm-sidebar h2 {
-    margin: 0 0 25px 0;
-    font-size: 1.5em;
+.cm-sidebar-header { padding: 20px 15px; border-bottom: 1px solid #495057; flex-shrink: 0;}
+.cm-sidebar-header h2 { margin: 0; font-size: 1.5em; }
+.cm-sidebar-header h2 a { color: #fff; text-decoration: none; }
+
+#cm-sidebar-nav { /* Style the nav container */
+    padding: 15px;
+    flex-grow: 1;
+    overflow-y: auto; /* Allow nav scrolling */
 }
-.cm-sidebar h2 a {
-    color: #fff;
-    text-decoration: none;
-}
-.cm-sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.cm-sidebar nav li a {
+#cm-sidebar-nav ul { list-style: none; padding: 0; margin: 0; }
+#cm-sidebar-nav li { margin-bottom: 2px; } /* Add space between items */
+#cm-sidebar-nav li a,
+#cm-sidebar-nav li span { /* Also style user info span */
     display: block;
     padding: 10px 15px;
     color: #adb5bd;
     border-radius: 4px;
-    margin-bottom: 5px;
-    transition: background-color 0.2s ease;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
-.cm-sidebar nav li a:hover,
-.cm-sidebar nav li a.active { /* Add .active class via JS/template logic if needed */
+#cm-sidebar-nav li a:hover {
     background-color: #495057;
     color: #fff;
-    text-decoration: none;
 }
-.cm-user-info {
-    margin-top: auto; /* Pushes user info to bottom */
-    padding-top: 20px;
-    border-top: 1px solid #495057;
+#cm-sidebar-nav li hr { margin: 10px 0; border-color: #495057; }
+#cm-sidebar-nav li.cm-user-info-mobile { /* Style user info in list */
+    padding: 10px 15px;
     font-size: 0.9em;
-}
-.logout-button {
-    background: none;
-    border: 1px solid #adb5bd;
     color: #adb5bd;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
 }
-.logout-button:hover {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white;
+#cm-sidebar-nav .logout-button-mobile {
+     background: none; border: 1px solid #adb5bd; color: #dc3545;
+     padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.9em;
+     margin-left: 5px; vertical-align: middle;
 }
+#cm-sidebar-nav .logout-button-mobile:hover { background-color: #dc3545; color: white;}
 
 
-/* Main Content Area */
+/* Main Content Area - Base (Desktop) */
 .cm-main-content {
     flex-grow: 1;
     padding: 25px 30px;
+    overflow-y: auto; /* Allow main content to scroll independently */
+    height: 100vh; /* Ensure it takes full height */
 }
-.cm-header h1 {
-    margin: 0 0 25px 0;
-    font-size: 1.8em;
-    color: #495057;
+
+/* Header */
+.cm-header {
+    position: relative; /* Needed for positioning the mobile nav dropdown */
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
     border-bottom: 1px solid #dee2e6;
     padding-bottom: 10px;
 }
+.cm-header h1 { margin: 0; font-size: 1.8em; color: #495057; flex-grow: 1; }
+
+/* Mobile Toggler Button (Common Styles) */
+.cm-mobile-toggler {
+    display: none; /* Hidden on Desktop */
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #495057;
+    padding: 6px 10px;
+    font-size: 1.4em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 15px;
+    line-height: 1;
+}
+.cm-mobile-toggler:hover { background-color: rgba(0, 0, 0, 0.05); }
 
 /* Dashboard */
 .dashboard-summary {
@@ -250,22 +264,78 @@ a:hover {
     margin-bottom: 20px;
 }
 
+
 /* Responsive */
 @media (max-width: 768px) {
     .cm-container {
-        flex-direction: column;
+        flex-direction: column; /* Stack header/main content vertically */
+        height: auto; /* Allow natural height */
+        min-height: 100vh;
     }
-    .cm-sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row; /* Make sidebar horizontal */
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
+
+    /* Hide Desktop Sidebar */
+    aside.cm-sidebar {
+        display: none;
     }
-    .cm-sidebar h2 { margin-bottom: 0; font-size: 1.3em;}
-    .cm-sidebar nav { /* Add toggler for nav on mobile */ display: none; }
-    .cm-user-info { margin-top: 0; border-top: none; padding-top: 0; }
-    .cm-main-content { padding: 20px 15px; }
-    .cm-header h1 { font-size: 1.5em; margin-bottom: 15px;}
+
+    /* Show Mobile Toggler */
+    .cm-mobile-toggler {
+        display: block; /* Show the button */
+    }
+
+    /* Style the Navigation as Mobile Dropdown */
+    /* Select the nav that was inside the sidebar */
+    #cm-sidebar-nav {
+        display: none; /* Hide it by default */
+        position: absolute;
+        width: auto; /* Let content determine width or set max-width */
+        max-width: 320px; /* Example max width */
+        background-color: #fff; /* White background for dropdown */
+        border: 1px solid #dee2e6;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+        z-index: 1000;
+        max-height: calc(100vh - 80px); /* Limit height */
+        overflow-y: auto; /* Scroll if needed */
+        padding: 5px 0; /* Reset padding */
+        border-radius: 0 0 5px 5px; /* Optional rounded bottom corners */
+    }
+    
+    /* Style list items for mobile */
+     #cm-sidebar-nav li { margin-bottom: 0; } /* Remove bottom margin */
+     #cm-sidebar-nav li a,
+     #cm-sidebar-nav li span {
+         padding: 10px 20px; /* Adjust padding */
+         color: #343a40;
+         border-bottom: 1px solid #eee; /* Add separators */
+     }
+     #cm-sidebar-nav li:last-child a,
+     #cm-sidebar-nav li:last-child span {
+         border-bottom: none; /* Remove last border */
+     }
+     #cm-sidebar-nav li a:hover {
+         background-color: #f8f9fa;
+         color: #0056b3;
+     }
+     #cm-sidebar-nav li.cm-user-info-mobile {
+        padding: 10px 20px; /* Match link padding */
+        background-color: #e9ecef; /* Slightly different bg */
+     }
+     #cm-sidebar-nav li hr { display: none; } /* Hide hr separators on mobile */
+
+     .is-active {
+        display: block; /* Show when active */
+    }
+    /* Adjust main content */
+    .cm-main-content {
+        padding: 15px; /* Reduce padding on mobile */
+        height: auto; /* Allow natural height */
+    }
+
+    .cm-header h1 {
+        font-size: 1.5em; /* Adjust header size */
+    }
+
+    /* Adjust table/form font sizes maybe */
+    .cm-table th, .cm-table td { padding: 8px 10px; font-size: 0.9em; }
+    /* Add other mobile adjustments as needed */
 }
