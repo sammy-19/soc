@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Define Static Slides (Ensure static paths are correct)
         const staticSlides = [
-             { title: "Become a Volunteer", text: "Join our team...", image_url: "/static/images/banners/volunteer_banner.jpg", button_text: "I Want to Volunteer", button_link: "#", button_action: "volunteer" },
+             { title: "Become a Volunteer", text: "Join our team...", image_url: "/static/images/banners/volunteer_banner.png", button_text: "I Want to Volunteer", button_link: "#", button_action: "volunteer" },
              { title: "Contact Us", text: "Have questions...?", image_url: "/static/images/banners/contact_banner.jpg", button_text: "Get In Touch", button_link: "/contact/", button_action: "link" }, // Use actual URL path
              { title: "Send Feedback", text: "Help us improve...", image_url: "/static/images/banners/feedback_banner.jpg", button_text: "Leave Feedback", button_link: "#feedback-form", button_action: "scroll" }
         ];
