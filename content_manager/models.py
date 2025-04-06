@@ -144,7 +144,7 @@ class BannerSlide(models.Model):
 
     title = models.CharField(max_length=150)
     text = models.TextField(max_length=300, blank=True)
-    image = models.ImageField(upload_to='banner_images/', help_text="Recommended size: e.g., 1920x800 pixels")
+    image = models.ImageField(upload_to='images/banner_images/', help_text="Recommended size: e.g., 1920x800 pixels")
     button_text = models.CharField(max_length=50, blank=True, default="Learn More") # More generic default
     button_link = models.CharField(max_length=255, blank=True, default="#", help_text="URL (#anchor, page URL) or leave '#' for popup actions")
     button_action = models.CharField(max_length=20, choices=ACTION_CHOICES, default='link', help_text="What should the button do?")
