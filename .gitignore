@@ -92,3 +92,6 @@ ehthumbs.db
 
 # Optional: macOS folder attributes
 .DS_Store
+
+# .env files
+.env
