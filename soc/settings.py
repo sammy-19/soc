@@ -128,11 +128,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # For development static files
-STATIC_ROOT = BASE_DIR / 'staticfiles' # For collectstatic / production
+STATIC_ROOT = BASE_DIR / 'staticfiles_build' # For collectstatic / production
 
 # Add STATICFILES_STORAGE for WhiteNoise if deploying
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media' 
 
 # Default primary key field type
 # ... (keep existing primary key setting) ...
