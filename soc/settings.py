@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Consider loading this from environment too for production deployments
-DEBUG = os.getenv('DEBUG', 'True') == 'True' # Load DEBUG from env, default to True
+DEBUG = os.getenv('DEBUG', 'True') == 'False' # Load DEBUG from env, default to True
 
 # Update ALLOWED_HOSTS if needed for production
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
