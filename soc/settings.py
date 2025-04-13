@@ -30,8 +30,8 @@ DEBUG = os.getenv('DEBUG', 'True') == 'False' # Load DEBUG from env, default to 
 
 # Update ALLOWED_HOSTS if needed for production
 #ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
-ALLOWED_HOSTS=['vercel.app','now.sh','127.0.0.1']
-
+#ALLOWED_HOSTS=['vercel.app','now.sh','127.0.0.1']
+ALLOWED_HOSTS=['https://soczambia.vercel.app/','vercel.app','now.sh','127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
