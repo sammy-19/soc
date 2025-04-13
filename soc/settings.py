@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'True') == 'False' # Load DEBUG from env, default to True
 
 # Update ALLOWED_HOSTS if needed for production
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
+ALLOWED_HOSTS = ['soczambia-op457myrf-sammys-projects-0643c7a6.vercel.app', '127.0.0.1', 'now.sh']
 # If you set ALLOWED_HOSTS=vercel.app,now.sh,127.0.0.1 in your .env or production env
 
 
