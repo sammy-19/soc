@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User # If you want to track authors
 from django.utils.text import slugify
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -11,7 +12,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True) # Unique slug for URLs
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    image = models.ImageField(upload_to='blog_images/', null=True, blank=True) # Requires Pillow
+    image = CloudinaryField('image', folder='blog_images/', null=True, blank=True) # Requires Pillow
     content = models.TextField()
     excerpt = models.TextField(max_length=300, blank=True, help_text="Short summary for blog listing page.")
     published_date = models.DateTimeField(auto_now_add=True)
@@ -37,7 +38,7 @@ class BlogPost(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='event_images/', null=True, blank=True)
+    image = CloudinaryField('image', folder='event_images/', null=True, blank=True)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField(null=True, blank=True)
     location_name = models.CharField(max_length=150)
@@ -67,7 +68,7 @@ class Program(models.Model):
     name = models.CharField(max_length=150)
     short_description = models.CharField(max_length=250, blank=True, help_text="Brief description for summaries.")
     full_description = models.TextField()
-    image = models.ImageField(upload_to='program_images/', null=True, blank=True)
+    image = CloudinaryField('image', folder='program_images/', null=True, blank=True)
     key_activities = models.TextField(blank=True, help_text="List key activities, perhaps one per line.")
     display_order = models.PositiveIntegerField(default=0, help_text="Order on the programs page (lower numbers first).")
     is_active = models.BooleanField(default=True)
@@ -81,7 +82,7 @@ class Program(models.Model):
 class Cause(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='cause_images/', null=True, blank=True)
+    image = CloudinaryField('image', folder='cause_images/', null=True, blank=True)
     goal_description = models.CharField(max_length=100, blank=True, help_text="Optional: e.g., 'Fundraising Target: $5,000'")
     donation_link = models.URLField(blank=True, help_text="Link to specific donation page for this cause, if any.")
     display_order = models.PositiveIntegerField(default=0, help_text="Order on the causes page.")
@@ -97,7 +98,7 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     bio = models.TextField(blank=True)
-    image = models.ImageField(upload_to='team_images/', null=True, blank=True)
+    image = CloudinaryField('image', folder='team_images/', null=True, blank=True)
     display_order = models.PositiveIntegerField(default=0, help_text="Order on the about page.")
     is_active = models.BooleanField(default=True)
 
@@ -123,7 +124,7 @@ class Value(models.Model):
 class Achievement(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='achievement_images/', null=True, blank=True)
+    image = CloudinaryField('image', folder='achievement_images/', null=True, blank=True)
     display_order = models.PositiveIntegerField(default=0, help_text="Order on the homepage/achievements section.")
     is_active = models.BooleanField(default=True)
 
@@ -144,7 +145,7 @@ class BannerSlide(models.Model):
 
     title = models.CharField(max_length=150)
     text = models.TextField(max_length=300, blank=True)
-    image = models.ImageField(upload_to='images/banner_images/', help_text="Recommended size: e.g., 1920x800 pixels")
+    image = CloudinaryField('image', folder='images/banner_images/', help_text="Recommended size: e.g., 1920x800 pixels")
     button_text = models.CharField(max_length=50, blank=True, default="Learn More") # More generic default
     button_link = models.CharField(max_length=255, blank=True, default="#", help_text="URL (#anchor, page URL) or leave '#' for popup actions")
     button_action = models.CharField(max_length=20, choices=ACTION_CHOICES, default='link', help_text="What should the button do?")
