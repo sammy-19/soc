@@ -1,8 +1,3 @@
-"""
-Django settings for soc project.
-... (keep existing comments) ...
-"""
-
 from pathlib import Path
 import os
 import dotenv
@@ -11,7 +6,6 @@ import cloudinary
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ADD THIS: Load .env file
 # Construct the path to the .env file (it should be in the BASE_DIR)
 dotenv_path = BASE_DIR / '.env'
 dotenv.load_dotenv(dotenv_path=dotenv_path)
@@ -29,9 +23,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Consider loading this from environment too for production deployments
 DEBUG = os.getenv('DEBUG', 'True') == 'False' # Load DEBUG from env, default to True
 
-# Update ALLOWED_HOSTS if needed for production
-#ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
-#ALLOWED_HOSTS=['vercel.app','now.sh','127.0.0.1']
+# ALLOWED HOSTS
 ALLOWED_HOSTS=['.vercel.app','now.sh','127.0.0.1']
 
 # Application definition
@@ -95,6 +87,9 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
+        'OPTIONS': {
+            'sslmode': os.getenv('DB_SSLMODE', 'require'),
+        }
     }
 }
 
