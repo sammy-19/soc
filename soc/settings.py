@@ -21,10 +21,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Consider loading this from environment too for production deployments
-DEBUG = os.getenv('DEBUG', 'True') == 'False' # Load DEBUG from env, default to True
+DEBUG = os.getenv('DEBUG', 'False') # Load DEBUG from env, default to True
 
 # ALLOWED HOSTS
-ALLOWED_HOSTS=['.vercel.app','now.sh','127.0.0.1']
+ALLOWED_HOSTS=['www.soczambia.org','soczambia.org','.vercel.app','now.sh','127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
