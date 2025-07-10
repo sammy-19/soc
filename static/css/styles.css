@@ -520,10 +520,12 @@ footer {
 
 .foot-info a {
     text-decoration: none;
-    padding: 0; /* Remove padding if margin handles spacing */
+    /*padding: 0;  Remove padding if margin handles spacing */
     color: inherit; /* Inherit color from .foot-info */
     display: inline-block; /* Ensure hover works well */
 }
+
+.social-footer a {padding: 10px;}
 
 
 .foot-info:hover, .foot-info:hover a {
@@ -910,7 +912,7 @@ cite, .copyrights p {
     .first-part p, .second-part p { font-size: 1.3em; } /* Adjust subtitle */
     .footer-content { flex-basis: 100%; /* Make footer columns full width */ text-align: center; /* Center text in footer columns */ }
     .footer-content h2 { text-align: center; } /* Center footer headings */
-    .foot-info { justify-content: center; } /* Center icons/text if needed */
+   /* .foot-info { justify-content: center; }  Center icons/text if needed */
     .copyrights { justify-content: center; text-align: center; }
 
     .donate-section h2,
@@ -985,6 +987,10 @@ cite, .copyrights p {
     #donate-info-popup h3 { font-size: 1.4em; }
     #donate-info-popup h4 { font-size: 1.1em; }
     #donate-info-popup .donation-method dd { font-size: 1em; }
+    .footer-links, .foot-info {
+        text-align: center;
+        text-transform: capitalize;
+    }
 }
 
 /* Very Small Screens */

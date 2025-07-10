@@ -5,16 +5,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% block title %}
-        {% endblock %}
-    </title>
+    <title>{% block title %}Saving Our Community Zambia | Empowering Through Education, Health & Sustainability{% endblock %}</title>
+    <meta name="description" content="Saving Our Community (SOC) Zambia empowers communities through education, health, agriculture, and youth development. Join us to uplift lives in Livingstone and beyond.">
+    <meta property="og:title" content="Saving Our Community Zambia | Empowering Through Education, Health & Sustainability">
+    <meta property="og:description" content="Saving Our Community (SOC) Zambia empowers communities through education, health, agriculture, and youth development. Join us to uplift lives in Livingstone and beyond.">
+    <meta property="og:image" content="https://www.soczambia.org{% static 'images/soc-logo.png' %}">
+    <meta property="og:url" content="https://www.soczambia.org/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://www.soczambia.org/" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/page-styles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/programs.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/soc-logo.png' %}">
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "NGO",
+          "name": "Saving Our Community Zambia",
+          "url": "https://www.soczambia.org",
+          "logo": "https://www.soczambia.org{% static 'images/soc-logo.png' %}",
+          "email": "savingourcommunityzambia@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2644/358 Nahumba Road",
+            "addressLocality": "Livingstone",
+            "addressCountry": "ZM"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+260975231604",
+            "contactType": "Customer Service"
+          }
+        }
+        </script>
 </head>
 
 <body>
@@ -81,11 +108,13 @@
             <div class='footer-content'>
                 <h2>Address</h2>
                 <p class='foot-info'><i class="fa fa-map-marker" aria-hidden="true"></i> <span>2644/358, Nahumba Rd, Livingstone.</span></p>
+                <p class='foot-info'><i class="fa fa-envelope" aria-hidden="true"></i> <span>info@info@soczambia.org</span></p>
                 <p class='foot-info'><i class="fa fa-envelope" aria-hidden="true"></i> <span>savingourcommunityzambia@gmail.com</span></p>
                 <p class='foot-info'><i class="fa fa-phone" aria-hidden="true"></i> <span>+260975231604</span></p>
-                 <p class='foot-info social-footer'> <a class='fa fa-instagram' href='https://www.instagram.com/p/CviX9Zwo1Ho/?igshid=YWYwM2I1ZDdmOQ==' target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a>
-                    <a class='fa fa-youtube' href='https://www.youtube.com/@Soczambia' target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a>
-                    <a class='fa fa-facebook' href="https://www.facebook.com/profile.php?id=100093639196424&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a>
+                 <p class='foot-info social-footer'>
+                    <a id='social-link' class='fa fa-instagram' href='https://www.instagram.com/p/CviX9Zwo1Ho/?igshid=YWYwM2I1ZDdmOQ==' target="_blank" rel="noopener noreferrer" aria-label="Instagram"></a><i>   </i>
+                    <a class='fa fa-youtube' href='https://www.youtube.com/@Soczambia' target="_blank" rel="noopener noreferrer" aria-label="YouTube"></a><i>   </i>
+                    <a class='fa fa-facebook' href="https://www.facebook.com/profile.php?id=100093639196424&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook"></a><i>   </i>
                     <a class='fa fa-linkedin' href='https://www.linkedin.com/in/saving-our-community-zambia-ab1b83261?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"></a>
                 </p>
             </div>
