@@ -1,3 +1,5 @@
+import markdown
+from django.utils.safestring import mark_safe
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
@@ -106,7 +108,8 @@ def blog(request):
     return render(request, 'home/blog.html', context)
 
 def blog_detail_view(request, slug): # or slug
-    post = get_object_or_404(BlogPost, slug=slug) # or slug=slug
+    post = get_object_or_404(BlogPost, slug=slug)
+    post.content = mark_safe(markdown.markdown(post.content, extensions=['fenced_code', 'codehilite', 'extra', 'tables']))
     context = {'post': post}
     return render(request, 'home/blog_detail.html', context)
 
