@@ -510,6 +510,10 @@ footer {
     margin-bottom: 15px; /* Space below heading */
 }
 
+.footer-links {
+    text-transform: capitalize;
+}
+
 .foot-info { /* Individual link/info line */
     display: block;
     color: rgb(203, 216, 216);
@@ -768,6 +772,242 @@ cite, .copyrights p {
     outline: none;
 }
 
+/* --- Blog Detail Page Specific Styles --- */
+
+/* Overall container for the blog detail page */
+.blog-detail-page {
+    background-color: #f7f7f7; /* Light background for the content area */
+    padding-bottom: 50px; /* Add some space at the bottom */
+}
+
+/* Section containing the full blog post */
+.blog-post-content {
+    padding: 30px 5%; /* Consistent padding with other sections */
+    max-width: 900px; /* Max width for readability of long articles */
+    margin: 0 auto; /* Center the content */
+    background-color: #ffffff; /* White background for the article itself */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    padding-top: 50px; /* More padding at the top inside the white box */
+}
+
+/* The full article wrapper */
+.full-blog-post {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align elements within the article */
+}
+
+/* Blog Post Image */
+.post-image {
+    width: 100%;
+    margin-bottom: 30px; /* Space below the image */
+    text-align: center; /* Center caption if present */
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px; /* Limit height for large images */
+    object-fit: cover; /* Ensure image covers the area, cropping if necessary */
+    border-radius: 8px; /* Slightly rounded corners for the image */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* A bit more pronounced shadow for the hero image */
+}
+
+.post-image figcaption {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Post Meta (Author, Date, Category) */
+.post-meta-detail {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 30px; /* Space below meta info */
+    text-align: center; /* Center align meta info */
+    width: 100%; /* Ensure it takes full width for centering */
+}
+
+.post-meta-detail span {
+    margin: 0 5px; /* Space between meta items */
+    font-weight: 500;
+}
+
+/* Blog Post Body Content */
+.post-body {
+    width: 100%;
+    line-height: 1.8; /* Increased line height for readability */
+    font-size: 1.1em;
+    color: #333;
+    /* Use max-width for long lines if needed, or let section-content-wide handle it */
+    padding: 0 20px; /* Add horizontal padding for content within the article box */
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.post-body h5,
+.post-body h6 {
+    color: navy; /* Consistent heading color */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.post-body p {
+    margin-bottom: 1em; /* Standard paragraph spacing */
+    text-align: justify; /* Justify text for a clean look */
+}
+
+.post-body ul,
+.post-body ol {
+    margin-left: 25px; /* Indent lists */
+    margin-bottom: 1em;
+}
+
+.post-body li {
+    margin-bottom: 0.5em;
+}
+
+/* Optional: Blockquotes */
+.post-body blockquote {
+    border-left: 5px solid rgb(255, 42, 77); /* Accent color for quotes */
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #555;
+}
+
+/* Optional: Code blocks */
+.post-body pre {
+    background-color: #eee;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto; /* Allow horizontal scrolling for wide code */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
+
+/* Optional: Horizontal rules */
+.post-body hr {
+    border: none;
+    border-top: 1px dashed #ccc;
+    margin: 40px 0;
+}
+
+
+/* Post Tags (if you're implementing them) */
+.post-tags {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    width: 100%;
+    text-align: center; /* Center align tags */
+}
+
+.post-tags strong {
+    color: #333;
+    margin-right: 10px;
+}
+
+.post-tags .tag {
+    display: inline-block;
+    background-color: #e0f2f7; /* Light blue background for tags */
+    color: #007bb6; /* Blue text for tags */
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    margin: 5px;
+    text-transform: capitalize;
+}
+
+/* Back to Blog Button */
+.back-to-blog {
+    margin-top: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+.back-to-blog .btn.primary-btn {
+    background-color: navy; /* Match your existing primary button style */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 2px solid navy; /* Keep border for hover effect */
+}
+
+.back-to-blog .btn.primary-btn:hover {
+    background-color: white;
+    color: navy;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Responsive Adjustments for Blog Detail Page --- */
+@media (max-width: 768px) {
+    .blog-post-content {
+        padding: 30px 3%; /* Adjust padding for smaller screens */
+        border-radius: 0; /* No border-radius on very small screens to save space */
+        box-shadow: none; /* No shadow */
+    }
+
+    .post-body {
+        padding: 0 10px; /* Reduce horizontal padding inside post body */
+        font-size: 1em; /* Slightly smaller font for readability on small screens */
+    }
+
+    .post-image img {
+        max-height: 300px; /* Limit image height more on mobile */
+    }
+
+    .post-meta-detail {
+        margin-bottom: 20px;
+    }
+
+    .post-tags {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-post-content {
+        padding: 20px 2%; /* Even less padding */
+    }
+
+    .post-image {
+        margin-bottom: 20px;
+    }
+
+    .post-image img {
+        border-radius: 0; /* No border radius on small screens */
+    }
+
+    .post-meta-detail span {
+        display: block; /* Stack meta items vertically */
+        margin: 5px 0;
+    }
+
+    .post-body h1, .post-body h2, .post-body h3 {
+        font-size: 1.5em; /* Smaller headings on very small screens */
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+    .post-body p {
+        font-size: 0.95em;
+    }
+
+    .back-to-blog {
+        width: 90%; /* Make button wider */
+        max-width: 300px;
+        border: 2px solid black;
+    }
+}
+
 /* Simple fade-in animation */
 @keyframes fadeInPopup {
   from { opacity: 0; transform: scale(0.95); }
@@ -987,9 +1227,9 @@ cite, .copyrights p {
     #donate-info-popup h3 { font-size: 1.4em; }
     #donate-info-popup h4 { font-size: 1.1em; }
     #donate-info-popup .donation-method dd { font-size: 1em; }
-    .footer-links, .foot-info {
-        text-align: center;
-        text-transform: capitalize;
+    .footer-links, .foot-info, .footer-content h2 {
+        text-align: left;
+        padding: 0;
     }
 }
 

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}{{ post.title }} | Blog post | Saving Our Community Zambia{% endblock %}
+
+{% block banner %}
+    <div class='banner-content inner-page-banner'>
+        <h1>{{ post.title }}</h1> 
+        <p>A deep dive into our work and stories.</p>
+    </div>
+{% endblock %}
+
+{% block main %}
+<div class="main-body-content blog-detail-page top-spacer"> {# Added specific class for this page #}
+    <section class="blog-post-content section-content-wide">
+        <article class="full-blog-post">
+            {# Post Image #}
+            {% if post.image %}
+                <figure class="post-image">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% if post.image_caption %}<figcaption>{{ post.image_caption }}</figcaption>{% endif %}
+                </figure>
+            {% else %}
+                <figure class="post-image">
+                    <img src="{% static 'images/placeholder_blog_detail.png' %}" alt="{{ post.title }}"> {# A larger placeholder if needed #}
+                </figure>
+            {% endif %}
+
+            {# Post Meta-information #}
+            <div class="post-meta-detail">
+                {% if post.author %}
+                    <span>By {{ post.author.get_full_name|default:post.author.username }}</span> | 
+                {% endif %}
+                <span>Published on {{ post.published_date|date:"F d, Y" }}</span>
+                {% if post.category %} | <span>Category: {{ post.category }}</span>{% endif %}
+            </div>
+
+            {# Post Content #}
+            <div class="post-body">
+                {{ post.content|safe }} {# Use |safe if your content might contain HTML #}
+            </div>
+
+            {# Optional: Add tags if your model has them #}
+            {% if post.tags.all %}
+                <div class="post-tags">
+                    <strong>Tags:</strong> 
+                    {% for tag in post.tags.all %}
+                        <span class="tag">{{ tag.name }}</span>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {# Back to Blog Button/Link #}
+            <div class="back-to-blog">
+                <a href="{% url 'home:blog' %}" class="btn primary-btn">&larr; Back to Blog</a>
+            </div>
+
+        </article>
+    </section>
+</div>
+{% endblock %}

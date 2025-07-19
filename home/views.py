@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.utils import timezone
 from django.core.mail import send_mail # For sending email notifications
@@ -104,6 +104,11 @@ def blog(request):
         'blog_posts': blog_posts,
     }
     return render(request, 'home/blog.html', context)
+
+def blog_detail_view(request, slug): # or slug
+    post = get_object_or_404(BlogPost, slug=slug) # or slug=slug
+    context = {'post': post}
+    return render(request, 'home/blog_detail.html', context)
 
 def contact(request):
     address_section = PageSection.objects.filter(section_key='contact_address').first()

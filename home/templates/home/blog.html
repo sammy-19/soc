@@ -2,7 +2,7 @@
 {% load static %}
 {% load cloudinary %}
 
-{% block title %}Blog | Saving Our Community{% endblock %}
+{% block title %}Blog | Saving Our Community Zambia{% endblock %}
 
 {% block banner %}
     <div class='banner-content inner-page-banner'>
@@ -39,16 +39,10 @@
                         {# Use excerpt if available, otherwise truncate content #}
                         {{ post.excerpt|default:post.content|truncatewords_html:35|linebreaksbr }}
                     </figcaption>
-                    {# IMPORTANT: Replace '#' with the actual URL to the blog post detail view #}
-                    {# You'll need to define get_absolute_url in the BlogPost model #}
-                    {# and create a URL pattern/view for displaying single posts #}
-                    <a href="#" class="btn-read-more">Read More</a>
+                    <a href="{{ post.get_absolute_url }}" class="btn-read-more">Read More</a>
                 </article>
                 {% endfor %}
             </div>
-
-            {# Optional: Pagination controls #}
-            {# <nav class="pagination"> ... </nav> #}
         </div>
     </section>
 

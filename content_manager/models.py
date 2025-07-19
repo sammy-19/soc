@@ -28,11 +28,9 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # Assumes you have a URL pattern named 'blog_post_detail' in your main app
-        # that takes a slug kwarg. Adjust if necessary.
-        # This is useful for linking from the admin/manager to the live post.
-        # return reverse('blog_post_detail', kwargs={'slug': self.slug})
-        return "#" # Replace with actual URL later
+        # return reverse('blog_detail', kwargs={'pk': self.pk})
+        # If you prefer slugs:
+        return reverse('home:blog_detail', kwargs={'slug': self.slug})
 
 # Model for Events
 class Event(models.Model):
