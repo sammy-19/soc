@@ -18,12 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings           # Required for media files
 from django.conf.urls.static import static # Required for media files
+from django.contrib.sitemaps.views import sitemap #for file sitemaps
+from home.sitemaps import StaticViewSitemap # Required for search engine optimisation
+
+sitemaps = {
+    'static': StaticViewSitemap,
+}
 
 urlpatterns = [
     path('content-admin/', include('content_manager.urls')),
     path('mail/', include('mail_client.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('home.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
     path('admin/', admin.site.urls),
 ]
 
