@@ -840,7 +840,7 @@ cite, .copyrights p {
     line-height: 1.8; /* Increased line height for readability */
     font-size: 1.1em;
     color: #333;
-    /* Use max-width for long lines if needed, or let section-content-wide handle it */
+    text-align: justify;
     padding: 0 20px; /* Add horizontal padding for content within the article box */
 }
 
@@ -931,12 +931,14 @@ cite, .copyrights p {
 }
 
 .back-to-blog .btn.primary-btn {
+    position: relative;
     background-color: navy; /* Match your existing primary button style */
     color: white;
-    padding: 12px 25px;
+    padding: 6px 15px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 1.1em;
     transition: background-color 0.3s ease, transform 0.2s ease;
     border: 2px solid navy; /* Keep border for hover effect */
 }
@@ -944,68 +946,8 @@ cite, .copyrights p {
 .back-to-blog .btn.primary-btn:hover {
     background-color: white;
     color: navy;
-    transform: translateY(-2px);
+    transform: translateY(-6px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Responsive Adjustments for Blog Detail Page --- */
-@media (max-width: 768px) {
-    .blog-post-content {
-        padding: 30px 3%; /* Adjust padding for smaller screens */
-        border-radius: 0; /* No border-radius on very small screens to save space */
-        box-shadow: none; /* No shadow */
-    }
-
-    .post-body {
-        padding: 0 10px; /* Reduce horizontal padding inside post body */
-        font-size: 1em; /* Slightly smaller font for readability on small screens */
-    }
-
-    .post-image img {
-        max-height: 300px; /* Limit image height more on mobile */
-    }
-
-    .post-meta-detail {
-        margin-bottom: 20px;
-    }
-
-    .post-tags {
-        margin-top: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .blog-post-content {
-        padding: 20px 2%; /* Even less padding */
-    }
-
-    .post-image {
-        margin-bottom: 20px;
-    }
-
-    .post-image img {
-        border-radius: 0; /* No border radius on small screens */
-    }
-
-    .post-meta-detail span {
-        display: block; /* Stack meta items vertically */
-        margin: 5px 0;
-    }
-
-    .post-body h1, .post-body h2, .post-body h3 {
-        font-size: 1.5em; /* Smaller headings on very small screens */
-        margin-top: 25px;
-        margin-bottom: 10px;
-    }
-    .post-body p {
-        font-size: 0.95em;
-    }
-
-    .back-to-blog {
-        width: 90%; /* Make button wider */
-        max-width: 300px;
-        border: 2px solid black;
-    }
 }
 
 /* Simple fade-in animation */
@@ -1142,6 +1084,29 @@ cite, .copyrights p {
         max-width: 450px; /* Limit max width */
     }
 
+    .blog-post-content {
+        padding: 30px 3%; /* Adjust padding for smaller screens */
+        border-radius: 0; /* No border-radius on very small screens to save space */
+        box-shadow: none; /* No shadow */
+    }
+
+    .post-body {
+        padding: 0 10px; /* Reduce horizontal padding inside post body */
+        font-size: 1em; /* Slightly smaller font for readability on small screens */
+    }
+
+    .post-image img {
+        max-height: 300px; /* Limit image height more on mobile */
+    }
+
+    .post-meta-detail {
+        margin-bottom: 20px;
+    }
+
+    .post-tags {
+        margin-top: 30px;
+    }
+
     /* General Adjustments */
     .banner h1 { font-size: 1.8em; max-width: 90%; }
     .banner p { font-size: 1em; max-width: 90%; }
@@ -1230,6 +1195,39 @@ cite, .copyrights p {
     .footer-links, .foot-info, .footer-content h2 {
         text-align: left;
         padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-post-content {
+        padding: 20px 2%; /* Even less padding */
+    }
+
+    .post-image {
+        margin-bottom: 20px;
+    }
+
+    .post-image img {
+        border-radius: 0; /* No border radius on small screens */
+    }
+
+    .post-meta-detail span {
+        display: block; /* Stack meta items vertically */
+        margin: 5px 0;
+    }
+
+    .post-body h1, .post-body h2, .post-body h3 {
+        font-size: 1.5em; /* Smaller headings on very small screens */
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+    .post-body p {
+        font-size: 0.95em;
+    }
+
+    .back-to-blog .btn.primary-btn{
+        width: 90%; /* Make button wider */
+        max-width: 300px;
     }
 }
 
