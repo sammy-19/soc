@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
+from .models import BlogPost, Event, Partner, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
@@ -34,6 +34,11 @@ class PageSectionForm(forms.ModelForm):
             super().__init__(*args, **kwargs)
             if self.instance and self.instance.pk: # If editing existing instance
                 self.fields['section_key'].widget.attrs['readonly'] = True
+
+class PartnerForm(forms.ModelForm):
+    class Meta:
+        model = Partner
+        fields = ['name', 'logo', 'website', 'is_active']
 
 class ProgramForm(forms.ModelForm):
     class Meta:

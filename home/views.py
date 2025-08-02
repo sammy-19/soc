@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.mail import send_mail # For sending email notifications
 from django.conf import settings # To get email settings
 from content_manager.models import (
-    BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
+    BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide, Partner,
 )
 from .forms import ContactForm, FeedbackForm, VolunteerForm
 from mail_client.models import FeedbackSubmission, ContactMessage, VolunteerApplication
@@ -23,7 +23,8 @@ def home(request):
     banner_title_section = PageSection.objects.filter(section_key='home_banner_title').first()
     banner_text_section = PageSection.objects.filter(section_key='home_banner_text').first()
     about_intro_section = PageSection.objects.filter(section_key='home_about_intro').first()
-    # Assuming home_intro_image section's content field stores the static URL path
+    
+    # home_intro_image section's content field stores the static URL path
     intro_image_section = PageSection.objects.filter(section_key='home_intro_image').first()
     home_tab_about = PageSection.objects.filter(section_key='home_tab_about').first()
     home_tab_vision = PageSection.objects.filter(section_key='home_tab_vision').first()
@@ -32,6 +33,9 @@ def home(request):
     active_slides = BannerSlide.objects.filter(is_active=True).order_by('display_order')
     featured_programs = Program.objects.filter(is_active=True).order_by('display_order')[:3]
     achievements = Achievement.objects.filter(is_active=True).order_by('display_order')
+    
+    # Partner field
+    partners = Partner.objects.filter(is_active=True)
 
     # Feedback Form Handling (Example integrated here)
     feedback_form = FeedbackForm() # Instantiate for GET request
@@ -65,7 +69,8 @@ def home(request):
         'home_tab_mission': home_tab_mission,
         'featured_programs': featured_programs,
         'achievements': achievements,
-        'feedback_form': feedback_form, # Pass form to template
+        'feedback_form': feedback_form,
+        'partners': partners,
     }
     return render(request, 'home/index.html', context)
 
@@ -92,7 +97,7 @@ def events(request):
         start_datetime__gte=now
     ).order_by('start_datetime')
     past_events = Event.objects.filter(start_datetime__lt=now).order_by('-start_datetime')[:6] # Show some past events
-
+    
     context = {
         'upcoming_events': upcoming_events,
         'past_events': past_events,

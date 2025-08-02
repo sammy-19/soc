@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin # For permissions
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import BlogPost, Event, PageSection, Program, Cause, TeamMember, Value, Achievement, BannerSlide
-from .forms import BlogPostForm, EventForm, PageSectionForm, ProgramForm, CauseForm, TeamMemberForm, ValueForm, AchievementForm, BannerSlideForm
+from .models import BlogPost, Event, PageSection, Partner, Program, Cause, TeamMember, Value, Achievement, BannerSlide
+from .forms import BlogPostForm, EventForm, PartnerForm, PageSectionForm, ProgramForm, CauseForm, TeamMemberForm, ValueForm, AchievementForm, BannerSlideForm
 
 
 # Mixin to check for staff status (or define custom groups/permissions)
@@ -20,6 +20,7 @@ class DashboardView(StaffRequiredMixin, TemplateView):
         context['blog_post_count'] = BlogPost.objects.count()
         context['event_count'] = Event.objects.count()
         context['section_count'] = PageSection.objects.count()
+        context['partner_count'] = Partner.objects.count()
         context['program_count'] = Program.objects.count()
         context['cause_count'] = Cause.objects.count()
         context['team_member_count'] = TeamMember.objects.count()
@@ -95,6 +96,27 @@ class PageSectionUpdateView(StaffRequiredMixin, UpdateView):
     template_name = 'content_manager/pagesection_form.html'
     success_url = reverse_lazy('cm_section_list')
     # PK URL conf uses 'pk', which maps to section_key because it's the primary key
+
+# List view
+def partner_list(request):
+    partners = Partner.objects.all()
+    return render(request, 'content_manager/partner_list.html', {'partners': partners})
+
+# Add/Edit Partner
+def partner_form(request, pk=None):
+    partner = get_object_or_404(Partner, pk=pk) if pk else None
+    form = PartnerForm(request.POST or None, request.FILES or None, instance=partner)
+    if form.is_valid():
+        form.save()
+        return redirect('cm_partner_list')
+    return render(request, 'content_manager/partner_form.html', {'form': form, 'partner': partner})
+
+# Delete
+def partner_delete(request, pk):
+    partner = get_object_or_404(Partner, pk=pk)
+    partner.delete()
+    return redirect('cm_partner_list')
+
 
 # --- Program Management ---
 class ProgramListView(StaffRequiredMixin, ListView):

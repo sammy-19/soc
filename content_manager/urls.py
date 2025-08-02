@@ -17,11 +17,17 @@ urlpatterns = [
     path('events/edit/<int:pk>/', views.EventUpdateView.as_view(), name='cm_event_edit'),
     path('events/delete/<int:pk>/', views.EventDeleteView.as_view(), name='cm_event_delete'),
 
-    # Page Sections (mainly editing)
+    # Page Sections (mainly editing and not adding)
     path('sections/', views.PageSectionListView.as_view(), name='cm_section_list'),
     path('sections/edit/<str:pk>/', views.PageSectionUpdateView.as_view(), name='cm_section_edit'), # Use pk (section_key)
+    
+    # Partner
+    path('partners/', views.partner_list, name='cm_partner_list'),
+    path('partners/add/', views.partner_form, name='cm_partner_add'),
+    path('partners/<int:pk>/edit/', views.partner_form, name='cm_partner_edit'),
+    path('partners/<int:pk>/delete/', views.partner_delete, name='cm_partner_delete'),
 
-     # Programs
+    # Programs
     path('programs/', views.ProgramListView.as_view(), name='cm_program_list'),
     path('programs/new/', views.ProgramCreateView.as_view(), name='cm_program_new'),
     path('programs/edit/<int:pk>/', views.ProgramUpdateView.as_view(), name='cm_program_edit'),

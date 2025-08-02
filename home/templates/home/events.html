@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load cloudinary %}
+{% load markdown_tags %}
 
 {% block title %}Events | Saving Our Community{% endblock %}
 
@@ -46,7 +47,7 @@
                             <span class="event-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.location_name }}</span>
                         </p>
                         <p class="event-description">
-                            {{ event.description|linebreaksbr }}
+                            {{ event.description|markdownify|safe }}
                         </p>
                         {% if event.registration_link %}
                             <a href="{{ event.registration_link }}" target="_blank" rel="noopener noreferrer" class="btn-event-more">Learn More / Register</a>

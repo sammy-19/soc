@@ -554,6 +554,132 @@ cite, .copyrights p {
     margin: 5px 10px; /* Add margin for spacing */
 }
 
+/* === EVENTS PAGE STYLES === */
+.main-body-content.events-page {
+    padding: 30px 0;
+    background-color: #fdfdfd;
+    color: #333;
+}
+
+/* Section Headings */
+.events-page h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #0056b3;
+}
+
+/* Events Grid Layout */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Event Item */
+.event-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+.event-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Event Image */
+.event-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Event Details */
+.event-details {
+    padding: 15px 20px;
+    flex-grow: 1;
+}
+
+.event-details h3 {
+    margin: 0 0 10px;
+    font-size: 1.4em;
+    color: #222;
+}
+
+.event-meta {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 12px;
+}
+.event-meta i {
+    margin-right: 4px;
+    color: #007bff;
+}
+
+/* Event Description */
+.event-description {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Event Button */
+.btn-event-more {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.95em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.btn-event-more:hover {
+    background-color: #0056b3;
+}
+
+/* Past Events Style */
+.past-events .event-item {
+    opacity: 0.8;
+    border-color: #ddd;
+}
+.past-events .event-item:hover {
+    opacity: 1;
+}
+
+/* Light Background Section */
+.light-bg {
+    background-color: #f6f9fc;
+    padding: 40px 0;
+}
+
+
+/* === Styles for partners section === */
+
+.partners-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+.partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+.partner-logo img {
+    max-height: 80px;
+    object-fit: contain;
+    transition: transform 0.2s ease-in-out;
+}
+.partner-logo img:hover {
+    transform: scale(1.05);
+}
+
 /* === Styles for New Sections (Donate, Volunteer, Feedback) === */
 
 /* General Section Styling */

@@ -112,6 +112,7 @@
             <aside class='more'><a href="{% url 'home:programs' %}">Learn More About Our Programs</a></aside>
         </section>
 
+        {# --- Achievements Section --- #}
         <section class="top-spacer second-part">
             <h2>Our Achievements!</h2>
             <p>What we have accomplished so far!!</p>
@@ -132,6 +133,29 @@
                 {% endfor %}
             </div>
             {# <aside class='more'><a href='#'>Read More</a></aside> #}
+        </section>
+
+        {# --- Partners Section --- #}
+        <section class="top-spacer partners-section section-content donate-section">
+            <h2>Our Partners</h2>
+            <p>We are proud to collaborate with incredible organizations that share our vision for community empowerment.</p>
+            
+            <div class="flex-wrapper partner-logos">
+                {% for partner in partners %}
+                    <div class="partner-logo">
+                        <h3>{{ partner.name }}</h3>
+                        {% if partner.website %}
+                            <a href="{{ partner.website }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                            </a>
+                        {% else %}
+                            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p>Partner logos and links will appear here soon.</p>
+                {% endfor %}
+            </div>
         </section>
 
         {# --- Donate Section --- #}

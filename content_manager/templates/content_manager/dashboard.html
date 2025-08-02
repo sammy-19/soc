@@ -13,41 +13,55 @@
         <p>{{ blog_post_count }}</p>
         <a href="{% url 'cm_blog_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
     <div class="summary-item">
         <h3>Events</h3>
         <p>{{ event_count }}</p>
          <a href="{% url 'cm_event_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
      <div class="summary-item">
         <h3>Page Sections</h3>
         <p>{{ section_count }}</p>
          <a href="{% url 'cm_section_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
+    <div class="summary-item">
+        <h3>Partners</h3>
+        <p>{{ partner_count }}</p>
+        <a href="{% url 'cm_partner_list' %}" class="btn btn-secondary">Manage</a>
+    </div>
+    
     <div class="summary-item">
         <h3>Programs</h3>
         <p>{{ program_count }}</p>
         <a href="{% url 'cm_program_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
     <div class="summary-item">
         <h3>Causes</h3>
         <p>{{ cause_count }}</p>
         <a href="{% url 'cm_cause_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
     <div class="summary-item">
         <h3>Team Members</h3>
         <p>{{ team_member_count }}</p>
         <a href="{% url 'cm_teammember_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
     <div class="summary-item">
         <h3>Core Values</h3>
         <p>{{ value_count }}</p>
         <a href="{% url 'cm_value_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+
     <div class="summary-item">
         <h3>Achievements</h3>
         <p>{{ achievement_count }}</p>
         <a href="{% url 'cm_achievement_list' %}" class="btn btn-secondary">Manage</a>
     </div>
+    
     <div class="summary-item">
         <h3>Banner Elements</h3>
         <p>{{ bannerslide_count }}</p>
