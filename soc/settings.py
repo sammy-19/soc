@@ -24,7 +24,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Consider loading this from environment too for production deployments
 DEBUG = True
 
-
 # ALLOWED HOSTS
 ALLOWED_HOSTS=['www.soczambia.org','soczambia.org','.vercel.app','now.sh','127.0.0.1']
 
