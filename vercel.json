@@ -8,6 +8,9 @@
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "soc/wsgi.py" }
+    {
+       "src": "/(.*)",
+       "dest": "soc/wsgi.py"
+    }
   ]
 }

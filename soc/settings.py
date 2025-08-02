@@ -146,7 +146,6 @@ MEDIA_URL = ''
 # MEDIA_ROOT = BASE_DIR / 'media' 
 
 # Default primary key field type
-# ... (keep existing primary key setting) ...
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING = {
