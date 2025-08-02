@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import sys
 import dotenv
 import cloudinary
 
@@ -149,11 +150,17 @@ MEDIA_URL = ''
 # ... (keep existing primary key setting) ...
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
+    },
 }
-"""
