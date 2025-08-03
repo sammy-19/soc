@@ -148,9 +148,3 @@ MEDIA_URL = ''
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-# Add to your settings.py bottom (just for Vercel builds)
-if os.getenv("VERCEL"):
-    from django.core.management import call_command
-    call_command("collectstatic", interactive=False)
