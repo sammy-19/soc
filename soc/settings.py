@@ -148,23 +148,9 @@ MEDIA_URL = ''
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'error.log',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    },
-}
+
 
 # Add to your settings.py bottom (just for Vercel builds)
+if os.getenv("VERCEL"):
+    from django.core.management import call_command
+    call_command("collectstatic", interactive=False)
