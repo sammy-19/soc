@@ -1,0 +1,8 @@
+{
+    "name": "soc",
+    "version": "1.0.0",
+    "scripts": {
+      "vercel-postbuild": "python manage.py collectstatic --noinput"
+    }
+  }
+  
