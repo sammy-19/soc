@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             {
                 title: "Become a Volunteer",
                 text: "Join our team and make a direct impact. Your time and skills are valuable!",
-                image_url: "{% static 'images/banners/volunteer_banner.jpg' %}", // ** Replace with actual static image path **
+                image_url: "{% static 'images/banners/volunteer.jpg' %}", // ** Replace with actual static image path **
                 button_text: "I Want to Volunteer",
                 button_link: "#", // Link isn't used, action is popup
                 button_action: "volunteer" // Custom action type
