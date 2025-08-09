@@ -1,5 +1,13 @@
 #!/bin/bash
 set -e
 
+# Install dependencies
+pip install --upgrade pip
 pip install -r requirements.txt
-python manage.py collectstatic --noinput
+
+# Run migrations
+python manage.py migrate --noinput
+
+# Collect static files
+python manage.py collectstatic --noinput --clear
+

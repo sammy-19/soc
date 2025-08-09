@@ -137,7 +137,8 @@ cloudinary.config(
 
 # Static files settings (Keep your Whitenoise setup)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
 STATIC_ROOT = BASE_DIR / 'staticfiles_build'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 if not DEBUG:
