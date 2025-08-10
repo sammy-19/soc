@@ -22,6 +22,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # Consider loading this from environment too for production deployments
 DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # ALLOWED HOSTS
 ALLOWED_HOSTS=['www.soczambia.org','soczambia.org','.vercel.app','now.sh','127.0.0.1']
@@ -135,7 +136,7 @@ cloudinary.config(
 # ========================
 
 
-# Static files settings (Keep your Whitenoise setup)
+# Static files settings (Keep your Wh itenoise setup)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 STATICFILES_DIRS = [

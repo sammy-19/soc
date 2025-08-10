@@ -1,0 +1,298 @@
+/* === General Styles (Ensure these or similar are defined) === */
+
+/* .top-spacer, .light-bg, .section-content, .section-content-wide already defined in previous CSS */
+
+/* Ensure flex-wrapper and grid-wrapper handle responsiveness */
+/* .flex-wrapper { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; } */
+/* .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; } */
+
+
+/* === Programs Page Specific Styles (.programs-page) === */
+
+.programs-page h2,
+.causes-page h2 { /* Shared style for section titles on these pages */
+    font-size: 2em;
+    color: navy;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.programs-page p,
+.causes-page p { /* Shared base paragraph style */
+    line-height: 1.7;
+    color: #555;
+    font-size: 1.05em;
+    margin-bottom: 15px;
+}
+
+/* --- Program Intro / Causes Intro --- */
+.program-intro .section-content p,
+.causes-intro .section-content p {
+    text-align: center;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1em; /* Slightly larger intro text */
+}
+
+/* --- Program Detail Sections --- */
+.program-detail {
+    /* padding applied by .top-spacer */
+    overflow: hidden; /* Clear floats or contain margins if needed */
+}
+
+.program-detail .flex-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    align-items: center; /* Vertically center items */
+    gap: 40px; /* Space between image and text */
+}
+
+.program-detail .program-image,
+.program-detail .program-text {
+    flex: 1 1 45%; /* Aim for roughly half width, allow shrinking/growing */
+    min-width: 300px; /* Prevent excessive shrinking */
+}
+
+.program-detail .program-image img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.program-detail .program-text h3 {
+    font-size: 1.8em;
+    color: rgb(255, 42, 77); /* Accent color for program titles */
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.program-detail .program-text h3 i {
+    margin-right: 10px;
+    color: navy; /* Use main color for icons here */
+}
+
+.program-detail .program-text h4 { /* 'Key Activities' heading */
+    font-size: 1.2em;
+    color: navy;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    display: inline-block; /* Only underline the text width */
+}
+
+.program-detail .program-text ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.program-detail .program-text ul li {
+    position: relative;
+    padding-left: 25px; /* Space for custom bullet */
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #555;
+}
+
+.program-detail .program-text ul li::before {
+    content: '\f00c'; /* Font Awesome check icon */
+    font-family: FontAwesome;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: rgb(255, 42, 77); /* Accent color for bullets */
+    font-size: 0.9em;
+}
+
+/* --- Alternating Layout --- */
+/* On larger screens, change the order for alternate sections */
+@media (min-width: 768px) {
+    .program-layout-alt .program-image {
+        order: 1; /* Image first */
+    }
+    .program-layout-alt .program-text {
+        order: 2; /* Text second */
+    }
+
+    .program-layout .program-text { /* Default layout */
+        order: 1; /* Text first */
+    }
+     .program-layout .program-image {
+        order: 2; /* Image second */
+    }
+}
+
+
+/* --- Program Call to Action Buttons --- */
+.btn-program-support {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: navy;
+    color: white;
+    border: 2px solid navy;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-program-support:hover {
+    background-color: white;
+    color: navy;
+}
+
+/* --- Programs Page - Final CTA Section --- */
+.program-cta {
+    text-align: center;
+    background-color: #e9ecef; /* Different background for final CTA */
+}
+.program-cta .section-content p {
+     max-width: 600px;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+
+/* === Causes Page Specific Styles (.causes-page) === */
+
+/* --- Causes Grid --- */
+
+.cause-item {
+    /* Reuses .program styles - background, padding, border-radius, hover effects */
+    display: flex;
+    flex-direction: column; /* Ensure items stack vertically inside card */
+}
+
+.cause-item img {
+    /* Reuses .program img styles - width, height, object-fit */
+    margin-bottom: 15px;
+}
+
+.cause-item h4 {
+     /* Reuses .program h4 styles - color, text-align */
+     font-size: 1.3em; /* Ensure consistent heading size */
+     margin-bottom: 10px;
+}
+
+.cause-item figcaption { /* Main description */
+    /* Reuses .program figcaption styles - font-size, line-height, color */
+    flex-grow: 1; /* Make description take available space */
+    margin-bottom: 20px; /* Space before button */
+    font-size: 0.95em;
+}
+
+/* --- Cause Goal / Progress (Optional) --- */
+.cause-goal {
+    font-weight: 500;
+    color: navy;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 90%;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin: 0 auto 15px auto; /* Center the progress bar */
+    overflow: hidden; /* Contain the progress */
+}
+
+.progress-bar .progress {
+    height: 100%;
+    background-color: rgb(255, 42, 77); /* Accent color for progress */
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* --- Cause Donate Button --- */
+.btn-cause-donate {
+    display: block; /* Make button full width of card padding */
+    width: calc(100% - 40px); /* Adjust based on card padding */
+    margin: 0 auto 0 auto; /* Center button horizontally */
+    padding: 12px 20px;
+    background-color: rgb(255, 42, 77); /* Primary accent color */
+    color: white;
+    border: 2px solid rgb(255, 42, 77);
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-cause-donate:hover {
+    background-color: white;
+    color: rgb(255, 42, 77);
+}
+
+/* --- General Donation CTA Section --- */
+.general-donation-cta {
+    text-align: center;
+}
+.general-donation-cta .section-content p {
+     max-width: 600px;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+
+/* === Responsive Adjustments for Programs & Causes Pages === */
+
+@media (max-width: 767px) {
+    .programs-page h2,
+    .causes-page h2 {
+        font-size: 1.8em;
+    }
+
+    /* Program Detail layout stacks due to flex-wrap */
+    .program-detail .flex-wrapper {
+        gap: 25px; /* Reduce gap when stacked */
+    }
+     .program-detail .program-image {
+         margin-bottom: 0px; /* Remove bottom margin when stacked if needed */
+    }
+    
+     .program-detail .program-text h3 {
+        font-size: 1.6em;
+    }
+
+    .cause-item h4 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .programs-page h2,
+    .causes-page h2 {
+        font-size: 1.6em;
+    }
+     .programs-page p,
+    .causes-page p {
+        font-size: 1em;
+    }
+
+     .program-detail .program-text h3 {
+        font-size: 1.4em;
+    }
+     .program-detail .program-text ul li {
+        padding-left: 20px; /* Adjust bullet spacing */
+        font-size: 0.95em;
+    }
+     .program-detail .program-text ul li::before {
+        top: 3px;
+    }
+
+     .cause-item h4 {
+        font-size: 1.1em;
+    }
+    .btn-cause-donate {
+        padding: 10px 15px;
+        width: calc(100% - 30px); /* Adjust based on card padding */
+    }
+}
