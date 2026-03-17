@@ -1,4 +1,4 @@
-﻿asgiref==3.8.1
+asgiref==3.8.1
 certifi==2025.1.31
 cloudinary==1.44.0
 Django==4.2
@@ -10,4 +10,4 @@ sqlparse==0.5.3
 tzdata==2025.2
 urllib3==2.4.0
 whitenoise==6.9.0
-markdown=3.6
+Markdown==3.6
