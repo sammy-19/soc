@@ -20,6 +20,7 @@ class EventAdmin(admin.ModelAdmin):
 class PageSectionAdmin(admin.ModelAdmin):
     list_display = ('section_key', 'title', 'updated_at')
     search_fields = ('section_key', 'title', 'content')
+    fields = ('section_key', 'title', 'content', 'image')  # Include image field for editing
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):

@@ -25,7 +25,7 @@ class EventForm(forms.ModelForm):
 class PageSectionForm(forms.ModelForm):
      class Meta:
         model = PageSection
-        fields = ['section_key', 'title', 'content']
+        fields = ['section_key', 'title', 'content', 'image']
         widgets = {
             'content': forms.Textarea(attrs={'rows': 10}),
         }

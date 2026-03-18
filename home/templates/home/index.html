@@ -37,9 +37,9 @@
     <div class='body-content'>
         <div class='intro-content'>
             <figure>
-                {# Example: Use PageSection content as URL #}
-                {% if intro_image_section %}
-                    <img src="{% static intro_image_section.content %}" alt="Introduction Image">
+                {# Example: Use PageSection image field #}
+                {% if intro_image_section and intro_image_section.image %}
+                    <img src="{{ intro_image_section.image.url }}" alt="Introduction Image">
                 {% else %}
                     <img src="{% static 'images/home/intro_image.jpg' %}" alt="Default Introduction Image"> {# Fallback #}
                 {% endif %}

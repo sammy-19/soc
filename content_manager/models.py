@@ -55,6 +55,7 @@ class PageSection(models.Model):
     section_key = models.CharField(max_length=100, unique=True, primary_key=True)
     title = models.CharField(max_length=200, blank=True) # Optional title for the section
     content = models.TextField()
+    image = CloudinaryField('image', folder='page_section_images/', null=True, blank=True) # Optional image for sections like intro_image_section
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

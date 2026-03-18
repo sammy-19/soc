@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 # ALLOWED HOSTS
-ALLOWED_HOSTS=['www.soczambia.org','soczambia.org','.vercel.app','now.sh','127.0.0.1']
+ALLOWED_HOSTS=['www.soczambia.org','soczambia.org','.vercel.app','now.sh','127.0.0.1', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
