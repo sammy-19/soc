@@ -1,0 +1,156 @@
+/* === Frontend Form Styling (Contact, Feedback, Volunteer) === */
+
+/* General styles for forms in specific sections */
+.contact-form-block form,
+.feedback-section form,
+#volunteer-popup form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Styling for paragraphs wrapping fields (if using form.as_p) */
+.contact-form-block form p,
+.feedback-section form p {
+    margin-bottom: 18px; /* Space between form fields */
+}
+
+/* Base Label Styling */
+label {
+    display: block; /* Ensure label is on its own line */
+    margin-bottom: 6px;
+    font-weight: 600; /* Make labels bolder */
+    color: #333;
+    font-size: 0.95em;
+}
+
+/* Base Input, Select, Textarea Styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="url"], /* Add other input types as needed */
+select,
+textarea {
+    display: block; /* Make them block elements */
+    width: 100%;   /* Make them full width of container */
+    padding: 10px 14px;
+    font-size: 1em;
+    font-family: inherit; /* Use main body font */
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 5px; /* Slightly rounded corners */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075); /* Subtle inner shadow */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+select {
+    /* Add appearance for consistent dropdown arrow styling (optional) */
+    /* appearance: none; */
+    /* background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230077B6%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); */
+    /* background-repeat: no-repeat; */
+    /* background-position: right .75rem center; */
+    /* background-size: 8px 10px; */
+    padding-right: 2rem; /* Ensure space for arrow */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 120px; /* Minimum height for textareas */
+}
+
+/* Focus Styling */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+    border-color: navy; /* Highlight border on focus */
+    outline: 0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075), 0 0 0 0.2rem rgba(0, 0, 128, 0.25); /* Add subtle glow */
+}
+
+/* Submit Button Styling */
+/* Reuse existing button classes if they match, or define specific ones */
+.btn-submit-contact,
+.btn-submit-feedback,
+.btn-submit-volunteer {
+    display: inline-block; /* Or block for full width */
+    width: 100%; /* Make buttons full width */
+    padding: 12px 25px;
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 25px; /* Match other buttons */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border: 2px solid navy; /* Use main color */
+    background-color: navy;
+    color: white;
+}
+
+.btn-submit-contact:hover,
+.btn-submit-feedback:hover,
+.btn-submit-volunteer:hover {
+    background-color: white;
+    color: navy;
+    transform: translateY(-2px);
+}
+
+
+/* Specific styles for Volunteer Popup Form (if using manual field layout) */
+/* Ensure these match or complement styles from cm_styles.css if copied previously */
+#volunteer-popup .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 15px; /* Horizontal gap only */
+    margin-bottom: 18px; /* Space between rows */
+}
+#volunteer-popup .form-group {
+     margin-bottom: 0; /* Remove bottom margin if using form-row gap */
+}
+#volunteer-popup .form-group.half-width {
+    flex: 1 1 calc(50% - 10px); /* Allow two fields per row */
+    min-width: 150px;
+}
+
+/* Responsive adjustments for forms */
+@media (max-width: 767px) {
+    #volunteer-popup .form-group.half-width {
+        flex-basis: 100%; /* Stack half-width fields */
+    }
+     #volunteer-popup .form-row {
+         gap: 18px 0; /* Vertical gap only when stacked */
+         margin-bottom: 0; /* Remove bottom margin when rows have gap */
+    }
+     #volunteer-popup .form-group {
+         margin-bottom: 18px; /* Add margin back to individual groups */
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="url"],
+    select,
+    textarea {
+        padding: 8px 12px; /* Slightly smaller padding */
+        font-size: 0.95em;
+    }
+    label {
+        font-size: 0.9em;
+    }
+    .btn-submit-contact,
+    .btn-submit-feedback,
+    .btn-submit-volunteer {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
