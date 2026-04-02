@@ -134,6 +134,14 @@ cloudinary.config(
 )
 # ========================
 
+# Facebook Configuration
+# ========================
+FACEBOOK_APP_ID = os.getenv('FACEBOOK_APP_ID')
+FACEBOOK_APP_SECRET = os.getenv('FACEBOOK_APP_SECRET')
+FACEBOOK_PAGE_ID = os.getenv('FACEBOOK_PAGE_ID')
+FACEBOOK_PAGE_ACCESS_TOKEN = os.getenv('FACEBOOK_PAGE_ACCESS_TOKEN')
+# ========================
+
 
 # Static files settings (Keep your Wh itenoise setup)
 STATIC_URL = '/static/'

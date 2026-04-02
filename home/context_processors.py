@@ -15,7 +15,7 @@ def donation_details(request):
     """
     details_keys = [
         'donate_bank_name', 'donate_account_name', 'donate_account_number',
-        'donate_branch_code', 'donate_swift_code',
+        'donate_branch_code', 'donate_swift_code', 'donate_sort_code',
         'donate_momo_mtn_name', 'donate_momo_mtn_number',
         'donate_momo_airtel_name', 'donate_momo_airtel_number',
         'donate_momo_zamtel_name', 'donate_momo_zamtel_number',

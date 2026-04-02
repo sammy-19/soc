@@ -5,6 +5,7 @@ Django==4.2
 pillow==11.1.0
 psycopg2-binary==2.9.10
 python-dotenv==1.1.0
+requests==2.31.0
 six==1.17.0
 sqlparse==0.5.3
 tzdata==2025.2

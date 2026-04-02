@@ -218,11 +218,12 @@
                 <div class="donation-method">
                     <h4><i class="fa fa-bank" aria-hidden="true"></i> Bank Transfer</h4>
                     <dl>
-                        <dt>Bank Name:</dt> <dd>{{ donation_details.donate_bank_name }}</dd>
-                        <dt>Account Name:</dt> <dd>{{ donation_details.donate_account_name }}</dd>
-                        <dt>Account Number:</dt> <dd>{{ donation_details.donate_account_number }}</dd>
-                        {% if donation_details.donate_branch_code %}<dt>Branch Code:</dt> <dd>{{ donation_details.donate_branch_code }}</dd>{% endif %}
-                        {% if donation_details.donate_swift_code %}<dt>SWIFT/BIC Code:</dt> <dd>{{ donation_details.donate_swift_code }}</dd>{% endif %}
+                        <dt><dd><strong>Bank Name:</strong> {{ donation_details.donate_bank_name }}</dd></dt>
+                        <dt><dd><strong>Account Name:</strong> {{ donation_details.donate_account_name }}</dd></dt>
+                        <dt><dd><strong>Account Number:</strong> {{ donation_details.donate_account_number }}</dd></dt>
+                        {% if donation_details.donate_branch_code %}<dt><dd><strong>Branch Code:</strong> {{ donation_details.donate_branch_code }}</dd></dt>{% endif %}
+                        {% if donation_details.donate_swift_code %}<dt><dd><strong>SWIFT/BIC Code:</strong> {{ donation_details.donate_swift_code }}</dd></dt>{% endif %}
+                        {% if donation_details.donate_sort_code %}<dt><dd><strong>Sort Code:</strong> {{ donation_details.donate_sort_code }}</dd></dt>{% endif %}
                     </dl>
                 </div>
                 {% endif %}
