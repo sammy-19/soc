@@ -223,7 +223,7 @@ anner-content h1,
 }
 
 .banner {
-    background-image: url('../images/home/children.jpg');
+    background-image: url("../images/home/children.dc2f5f5043cf.jpg");
     background-size: cover;
     background-position: center; /* Center the background image */
     min-height: 70vh;

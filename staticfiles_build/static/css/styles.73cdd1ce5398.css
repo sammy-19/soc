@@ -223,7 +223,7 @@ anner-content h1,
 }
 
 .banner {
-    background-image: url('../images/home/children.jpg');
+    background-image: url("../images/home/children.dc2f5f5043cf.jpg");
     background-size: cover;
     background-position: center; /* Center the background image */
     min-height: 70vh;
@@ -267,6 +267,7 @@ anner-content h1,
     transform: translateY(-50%); /* Fine-tune vertical centering */
     font-size: 2em; /* Slightly larger */
     color: #f1e3e3; /* Ensure visibility */
+    background-color: rgba(234, 234, 255, 0.93); /* Semi-transparent background for better visibility */
     cursor: pointer; /* Add pointer cursor */
     transition: color 0.3s ease; /* Smooth transition */
     z-index: 10; /* Ensure buttons are above content */
